@@ -34,6 +34,7 @@ $routes->setAutoRoute(true);
 $routes->get('/', 'Login::index');
 $routes->get('/admin', 'Admin::index');
 $routes->get('/student', 'student::index');
+$routes->get('/logout', 'Login::logout');
 
 /*
  * --------------------------------------------------------------------
