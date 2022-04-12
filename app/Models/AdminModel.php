@@ -14,7 +14,7 @@ class AdminModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = true;
     protected $protectFields    = true;
-    protected $allowedFields    = ['username', 'password', 'last_login'];
+    protected $allowedFields    = ['username', 'password', 'session'];
 
     // Dates
     protected $useTimestamps = true;
@@ -39,4 +39,24 @@ class AdminModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    function verifyLogin($username = null, $password = null)
+    {
+        $admin = $this->where('username', $username)->find()[0];
+
+        if (password_verify($password, $admin['password'])) {
+            helper('text');
+            $sessionToken = random_string('alnum', 64);
+            $this->update($admin['id'], ['session' => $sessionToken]);
+            session()->set('session', $sessionToken);
+
+            return true;
+        }
+        return false;
+    }
+
+    function check(): bool
+    {
+        return count($this->where('session', session()->get('session'))->limit(1)->find());
+    }
 }

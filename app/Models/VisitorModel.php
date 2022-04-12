@@ -39,4 +39,25 @@ class VisitorModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    function visit($name, $classroom)
+    {
+        $student = $this->where('name', $name)
+            ->where('classroom', $classroom)
+            ->find();
+
+        if ($student) {
+            $student = $student[0];
+            session()->set('name', $name);
+            session()->set('classroom', $classroom);
+
+            return $this->update($student['id'], ['visited' => $student['visited'] + 1]);
+        } else {
+            return $this->insert([
+                'name' => $name,
+                'classroom' => $classroom,
+                'visited' => 1
+            ]);
+        }
+    }
 }
