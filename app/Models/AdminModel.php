@@ -4,6 +4,8 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
+use function PHPUnit\Framework\returnSelf;
+
 class AdminModel extends Model
 {
     protected $DBGroup          = 'default';
@@ -42,6 +44,8 @@ class AdminModel extends Model
 
     function verifyLogin($username = null, $password = null)
     {
+        if (!$username && !$password) return false;
+
         $admin = $this->where('username', $username)->find()[0];
 
         if (password_verify($password, $admin['password'])) {
