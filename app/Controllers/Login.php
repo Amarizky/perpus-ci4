@@ -23,7 +23,7 @@ class Login extends BaseController
 
     public function login_student()
     {
-        $name      = strtoupper($this->request->getPost('name'));
+        $name      = ucwords($this->request->getPost('name'));
         $classroom = strtoupper($this->request->getPost('classroom'));
 
         $visitorModel = new \App\Models\VisitorModel();
