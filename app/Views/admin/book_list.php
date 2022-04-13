@@ -67,7 +67,7 @@ use CodeIgniter\I18n\Time;
                             <td class="align-middle"><?= $b->returns_in ? Time::createFromTimestamp($b->returns_in)->toLocalizedString('d-MM-Y') : '-'; ?></td>
                             <td class="align-middle text-center">
                                 <a href="#" data-book-id="<?= $b->id; ?>" data-bs-toggle="modal" data-bs-target="#book_edit" style="width: 58px;" class="btn btn-sm btn-success btn-edit">Edit</a>
-                                <a href="#" data-book-id="<?= $b->id; ?>" style="width: 58px;" class="btn btn-sm btn-warning btn-delete">Hapus</a>
+                                <a href="#" data-book-id="<?= $b->id; ?>" data-book-title="<?= $b->name; ?>" data-book-category="<?= $b->category; ?>" data-book-author="<?= $b->author; ?>" data-book-year="<?= $b->year; ?>" data-bs-toggle="modal" data-bs-target="#book_delete" style="width: 58px;" class="btn btn-sm btn-warning btn-delete">Hapus</a>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -203,6 +203,49 @@ use CodeIgniter\I18n\Time;
     </div>
 </form>
 
+<form id="book_delete" action="<?= base_url('admin/book_delete'); ?>" method="post" class="modal" tabindex="-1">
+    <input type="hidden" name="<?= csrf_token(); ?>" id="delete_csrf" value="<?= csrf_hash(); ?>">
+    <input type="hidden" name="book_id" id="delete_book_id">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Hapus buku</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <table>
+                    <tr>
+                        <td>Nama</td>
+                        <td> : </td>
+                        <td id="delete_book_title"></td>
+                    </tr>
+                    <tr>
+                        <td>Kategori</td>
+                        <td> : </td>
+                        <td id="delete_book_category"></td>
+                    </tr>
+                    <tr>
+                        <td>Penulis</td>
+                        <td> : </td>
+                        <td id="delete_book_author"></td>
+                    </tr>
+                    <tr>
+                        <td>Tahun</td>
+                        <td> : </td>
+                        <td id="delete_book_year"></td>
+                    </tr>
+                </table>
+                <br>
+                <p>Apakah Anda yakin ingin menghapus buku tersebut dari database?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tidak</button>
+                <button type="submit" class="btn btn-danger">Ya</button>
+            </div>
+        </div>
+    </div>
+</form>
+
 <script>
     var csrf = '<?= csrf_hash(); ?>';
 
@@ -230,6 +273,14 @@ use CodeIgniter\I18n\Time;
                 $('#edit_year').val(data.year);
             },
         });
+    });
+
+    $('.btn-delete').click(function() {
+        $('#delete_book_id').val($(this).data('book-id'));
+        $('#delete_book_title').html($(this).data('book-title'));
+        $('#delete_book_category').html($(this).data('book-category'));
+        $('#delete_book_author').html($(this).data('book-author'));
+        $('#delete_book_year').html($(this).data('book-year'));
     });
 
     $('input').change(function() {

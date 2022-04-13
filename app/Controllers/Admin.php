@@ -82,6 +82,16 @@ class Admin extends BaseController
 
     public function book_delete()
     {
+        $id = $this->request->getPost('book_id');
+
+        $bookModel = new BookModel();
+        $book = $bookModel->find($id);
+
+        session()->setFlashdata('toast', [
+            'title' => 'Buku',
+            'message' => "Buku berjudul \"{$book->name}\" berhasil dihapus",
+        ]);
+        return redirect()->to('/admin');
     }
 
     public function get_book_data()
