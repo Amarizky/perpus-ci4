@@ -28,10 +28,10 @@ class Admin extends BaseController
     public function book_edit()
     {
         $bookModel = new BookModel();
-        $id        = $this->request->getPost('book-id');
+        $id        = $this->request->getPost('book_id');
         $data      = [
             'name'        => $this->request->getPost('name'),
-            'category_id' => $this->request->getPost('category-id'),
+            'category_id' => $this->request->getPost('category_id'),
             'author'      => $this->request->getPost('author'),
             'year'        => $this->request->getPost('year'),
         ];

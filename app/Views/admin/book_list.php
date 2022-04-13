@@ -65,9 +65,9 @@ use CodeIgniter\I18n\Time;
     </div>
 </div>
 
-<form id="book-edit" action="<?= base_url('admin/book_edit') ?>" method="post" class="modal" data-bs-backdrop="static" tabindex="-1">
-    <input type="hidden" name="csrf_test_name" id="csrf" value="<?= csrf_hash(); ?>">
-    <input type="hidden" name="book-id" id="book-id">
+<form id="book_edit" action="<?= base_url('admin/book_edit') ?>" method="post" class="modal" data-bs-backdrop="static" tabindex="-1">
+    <input type="hidden" name="csrf_test_name" id="csrf_edit" value="<?= csrf_hash(); ?>">
+    <input type="hidden" name="book_id" id="book_id">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -80,8 +80,8 @@ use CodeIgniter\I18n\Time;
                     <input type="text" class="form-control" id="name" name="name" placeholder="Masukkan nama buku">
                 </div>
                 <div class="mb-3">
-                    <label for="category-id" class="form-label">Kategori</label>
-                    <select class="form-select" id="category-id" name="category-id">
+                    <label for="category_id" class="form-label">Kategori</label>
+                    <select class="form-select" id="category_id" name="category_id">
                         <option value="null" disabled selected>Pilih salah satu</option>
                         <?php foreach ($categories as $category) : ?>
                             <option value="<?= $category->id; ?>"><?= $category->name; ?></option>
@@ -122,17 +122,17 @@ use CodeIgniter\I18n\Time;
             success: function(data) {
                 data = JSON.parse(data);
                 csrf = data.csrf;
-                $('#csrf').val(data.csrf);
+                $('#csrf-edit').val(data.csrf);
 
-                $('#book-id').val(data.id);
+                $('#book_id').val(data.id);
                 $('#name').val(data.name);
-                $('#category-id').val(data.category_id).change();
+                $('#category_id').val(data.category_id).change();
                 $('#author').val(data.author);
                 $('#year').val(data.year);
             },
         });
 
-        $('#book-edit').modal('show');
+        $('#book_edit').modal('show');
     })
 </script>
 
