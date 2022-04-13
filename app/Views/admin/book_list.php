@@ -10,6 +10,23 @@ use CodeIgniter\I18n\Time;
 ?>
 
 <div class="container-fluid">
+    <?php if ($toast = session()->getFlashdata('toast')) : ?>
+        <div class="position-relative">
+            <div class="toast-container position-absolute top-0 start-0 p-3 pt-0" style="z-index: 11;" id="toastPlacement">
+                <div class="toast bg-success text-white" style="z-index: 11;">
+                    <div class="toast-header">
+                        <strong class="me-auto"><?= $toast['title']; ?></strong>
+                        <small>Baru saja</small>
+                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body">
+                        <?= $toast['message']; ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <?php endif; ?>
+
     <div class="row mt-4">
         <div class="col">
             <?= $pager->links('default', 'bootstrap'); ?>
@@ -232,6 +249,7 @@ use CodeIgniter\I18n\Time;
             $('#btn_edit_close_2').hide();
             $(modal_id).modal('show');
         }
+        $('.toast').toast('show');
     });
 </script>
 

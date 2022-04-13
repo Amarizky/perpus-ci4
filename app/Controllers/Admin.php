@@ -27,10 +27,10 @@ class Admin extends BaseController
 
     public function book_add()
     {
-        $name = $this->request->getPost('name');
+        $name        = $this->request->getPost('name');
         $category_id = $this->request->getPost('category_id');
-        $author = $this->request->getPost('author');
-        $year = $this->request->getPost('year');
+        $author      = $this->request->getPost('author');
+        $year        = $this->request->getPost('year');
 
         $bookModel = new BookModel();
         $data      = [
@@ -45,18 +45,27 @@ class Admin extends BaseController
             return redirect()->to('/admin#book_add')->withInput();
         }
 
+        session()->setFlashdata('toast', [
+            'title' => 'Buku',
+            'message' => "Buku berjudul \"{$name}\" berhasil ditambahkan",
+        ]);
         return redirect()->to('/admin');
     }
 
     public function book_edit()
     {
+        $id          = $this->request->getPost('book_id');
+        $name        = $this->request->getPost('name');
+        $category_id = $this->request->getPost('category_id');
+        $author      = $this->request->getPost('author');
+        $year        = $this->request->getPost('year');
+
         $bookModel = new BookModel();
-        $id        = $this->request->getPost('book_id');
         $data      = [
-            'name'        => $this->request->getPost('name'),
-            'category_id' => $this->request->getPost('category_id'),
-            'author'      => $this->request->getPost('author'),
-            'year'        => $this->request->getPost('year'),
+            'name'        => $name,
+            'category_id' => $category_id,
+            'author'      => $author,
+            'year'        => $year,
         ];
 
         if (!$bookModel->update($id, $data)) {
@@ -64,7 +73,15 @@ class Admin extends BaseController
             return redirect()->to('/admin#book_edit')->withInput();
         }
 
+        session()->setFlashdata('toast', [
+            'title' => 'Buku',
+            'message' => "Buku berjudul \"{$name}\" berhasil diedit",
+        ]);
         return redirect()->to('/admin');
+    }
+
+    public function book_delete()
+    {
     }
 
     public function get_book_data()
