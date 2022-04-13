@@ -25,6 +25,28 @@ class Admin extends BaseController
         ]);
     }
 
+    public function book_add()
+    {
+        $name = $this->request->getPost('name');
+        $category_id = $this->request->getPost('category_id');
+        $author = $this->request->getPost('author');
+        $year = $this->request->getPost('year');
+
+        if (!$name || !$category_id || !$author || !$year) return redirect()->to('/admin');
+
+        $bookModel = new BookModel();
+        $data      = [
+            'name'        => $name,
+            'category_id' => $category_id,
+            'author'      => $author,
+            'year'        => $year,
+        ];
+
+        $bookModel->insert($data);
+
+        return redirect()->to('/admin');
+    }
+
     public function book_edit()
     {
         $bookModel = new BookModel();

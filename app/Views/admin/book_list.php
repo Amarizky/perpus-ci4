@@ -17,7 +17,7 @@ use CodeIgniter\I18n\Time;
     </div>
     <div class="row mb-2">
         <div class="col text-end">
-            <a href="#" class="btn btn-primary">Tambah Buku Baru</a>
+            <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#book_add">Tambah Buku Baru</a>
         </div>
     </div>
     <div class="row">
@@ -49,7 +49,7 @@ use CodeIgniter\I18n\Time;
                             <td class="align-middle"><?= $b->loaned_at ? 'Jam ' . str_replace(' ', "<br>", Time::createFromTimestamp($b->loaned_at)->toLocalizedString('HH:m d-MM-Y')) : '-'; ?></td>
                             <td class="align-middle"><?= $b->returns_in ? Time::createFromTimestamp($b->returns_in)->toLocalizedString('d-MM-Y') : '-'; ?></td>
                             <td class="align-middle text-center">
-                                <a href="#" data-book-id="<?= $b->id; ?>" style="width: 58px;" class="btn btn-sm btn-success btn-edit">Edit</a>
+                                <a href="#" data-book-id="<?= $b->id; ?>" data-bs-toggle="modal" data-bs-target="#book_edit" style="width: 58px;" class="btn btn-sm btn-success btn-edit">Edit</a>
                                 <a href="#" data-book-id="<?= $b->id; ?>" style="width: 58px;" class="btn btn-sm btn-warning btn-delete">Hapus</a>
                             </td>
                         </tr>
@@ -65,9 +65,48 @@ use CodeIgniter\I18n\Time;
     </div>
 </div>
 
-<form id="book_edit" action="<?= base_url('admin/book_edit') ?>" method="post" class="modal" data-bs-backdrop="static" tabindex="-1">
-    <input type="hidden" name="csrf_test_name" id="csrf_edit" value="<?= csrf_hash(); ?>">
-    <input type="hidden" name="book_id" id="book_id">
+<form id="book_add" action="<?= base_url('admin/book_add'); ?>" method="post" class="modal" tabindex="-1">
+    <input type="hidden" name="<?= csrf_token(); ?>" id="add_csrf" value="<?= csrf_hash(); ?>">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Tambah Buku</h5>
+                <button class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label for="add_name" class="form-label">Nama Buku</label>
+                    <input type="text" class="form-control" id="add_name" name="name" placeholder="Masukkan nama buku" required>
+                </div>
+                <div class="mb-3">
+                    <label for="add_category_id" class="form-label">Kategori</label>
+                    <select class="form-select" id="add_category_id" name="category_id" required>
+                        <option value="null" disabled selected>Pilih salah satu</option>
+                        <?php foreach ($categories as $category) : ?>
+                            <option value="<?= $category->id; ?>"><?= $category->name; ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="add_author" class="form-label">Penulis</label>
+                    <input type="text" class="form-control" id="add_author" name="author" placeholder="Masukkan nama penulis" required>
+                </div>
+                <div class="mb-3">
+                    <label for="add_year" class="form-label">Tahun</label>
+                    <input type="number" class="form-control" id="add_year" name="year" placeholder="Masukkan tahun" required>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                <button type="submit" class="btn btn-primary">Tambah</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+<form id="book_edit" action="<?= base_url('admin/book_edit'); ?>" method="post" class="modal" data-bs-backdrop="static" tabindex="-1">
+    <input type="hidden" name="<?= csrf_token(); ?>" id="edit_csrf" value="<?= csrf_hash(); ?>">
+    <input type="hidden" name="book_id" id="edit_book_id">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -76,12 +115,12 @@ use CodeIgniter\I18n\Time;
             </div>
             <div class="modal-body">
                 <div class="mb-3">
-                    <label for="name" class="form-label">Nama Buku</label>
-                    <input type="text" class="form-control" id="name" name="name" placeholder="Masukkan nama buku">
+                    <label for="edit_name" class="form-label">Nama Buku</label>
+                    <input type="text" class="form-control" id="edit_name" name="name" placeholder="Masukkan nama buku" required>
                 </div>
                 <div class="mb-3">
-                    <label for="category_id" class="form-label">Kategori</label>
-                    <select class="form-select" id="category_id" name="category_id">
+                    <label for="edit_category_id" class="form-label">Kategori</label>
+                    <select class="form-select" id="edit_category_id" name="category_id" required>
                         <option value="null" disabled selected>Pilih salah satu</option>
                         <?php foreach ($categories as $category) : ?>
                             <option value="<?= $category->id; ?>"><?= $category->name; ?></option>
@@ -89,12 +128,12 @@ use CodeIgniter\I18n\Time;
                     </select>
                 </div>
                 <div class="mb-3">
-                    <label for="author" class="form-label">Penulis</label>
-                    <input type="text" class="form-control" id="author" name="author" placeholder="Masukkan nama penulis">
+                    <label for="edit_author" class="form-label">Penulis</label>
+                    <input type="text" class="form-control" id="edit_author" name="author" placeholder="Masukkan nama penulis" required>
                 </div>
                 <div class="mb-3">
-                    <label for="year" class="form-label">Tahun</label>
-                    <input type="number" class="form-control" id="year" name="year" placeholder="Masukkan tahun">
+                    <label for="edit_year" class="form-label">Tahun</label>
+                    <input type="number" class="form-control" id="edit_year" name="year" placeholder="Masukkan tahun" required>
                 </div>
             </div>
             <div class="modal-footer">
@@ -122,17 +161,16 @@ use CodeIgniter\I18n\Time;
             success: function(data) {
                 data = JSON.parse(data);
                 csrf = data.csrf;
-                $('#csrf-edit').val(data.csrf);
+                $('#edit_csrf').val(data.csrf);
+                $('#add_csrf').val(data.csrf);
 
-                $('#book_id').val(data.id);
-                $('#name').val(data.name);
-                $('#category_id').val(data.category_id).change();
-                $('#author').val(data.author);
-                $('#year').val(data.year);
+                $('#edit_book_id').val(data.id);
+                $('#edit_name').val(data.name);
+                $('#edit_category_id').val(data.category_id).change();
+                $('#edit_author').val(data.author);
+                $('#edit_year').val(data.year);
             },
         });
-
-        $('#book_edit').modal('show');
     })
 </script>
 
