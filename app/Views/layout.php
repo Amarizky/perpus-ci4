@@ -11,7 +11,7 @@
     <script src="assets/js/jquery-3.6.0.min.js"></script>
 </head>
 
-<body class="d-flex" style="height: 100vh;">
+<body style="height: 100vh;">
     <?= $this->renderSection('content'); ?>
 </body>
 
