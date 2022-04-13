@@ -46,10 +46,10 @@ class AdminModel extends Model
 
         $admin = $this->where('username', $username)->find()[0];
 
-        if (password_verify($password, $admin['password'])) {
+        if (password_verify($password, $admin->password)) {
             helper('text');
             $sessionToken = random_string('alnum', 64);
-            $this->update($admin['id'], ['session' => $sessionToken]);
+            $this->update($admin->id, ['session' => $sessionToken]);
             session()->set('session', $sessionToken);
             session()->set('admin', true);
 
