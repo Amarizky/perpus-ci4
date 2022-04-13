@@ -14,7 +14,7 @@ class CategoryModel extends Model
     protected $returnType       = 'object';
     protected $useSoftDeletes   = true;
     protected $protectFields    = true;
-    protected $allowedFields    = ['name', 'alias'];
+    protected $allowedFields    = ['name'];
 
     // Dates
     protected $useTimestamps = true;
@@ -40,19 +40,15 @@ class CategoryModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    public function getCategoryName($id)
+    function getCategoryName($id)
     {
-        if (is_null($id))
-            return null;
-
+        if (is_null($id)) return null;
         return $this->find($id)['name'];
     }
 
-    public function getCategoryId($name)
+    function getCategoryId($name)
     {
-        if ($cat = $this->where('name', $name)->orWhere('alias', $name)->find())
-            return $cat[0]['id'];
-
+        if ($cat = $this->where('name', $name)->orWhere('alias', $name)->find()) return $cat[0]['id'];
         return null;
     }
 }
