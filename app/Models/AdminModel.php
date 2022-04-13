@@ -4,8 +4,6 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-use function PHPUnit\Framework\returnSelf;
-
 class AdminModel extends Model
 {
     protected $DBGroup          = 'default';
@@ -13,7 +11,7 @@ class AdminModel extends Model
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
-    protected $returnType       = 'array';
+    protected $returnType       = 'object';
     protected $useSoftDeletes   = true;
     protected $protectFields    = true;
     protected $allowedFields    = ['username', 'password', 'session'];
@@ -53,6 +51,7 @@ class AdminModel extends Model
             $sessionToken = random_string('alnum', 64);
             $this->update($admin['id'], ['session' => $sessionToken]);
             session()->set('session', $sessionToken);
+            session()->set('admin', true);
 
             return true;
         }
