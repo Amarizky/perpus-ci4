@@ -17,7 +17,7 @@ use CodeIgniter\I18n\Time;
     </div>
     <div class="row mb-2">
         <div class="col text-end">
-            <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#book_add">Tambah Buku Baru</a>
+            <button class="btn btn-primary" onclick="$('form').each((i, e) => e.reset())" data-bs-toggle="modal" data-bs-target="#book_add">Tambah Buku Baru</button>
         </div>
     </div>
     <div class="row">
@@ -65,7 +65,7 @@ use CodeIgniter\I18n\Time;
     </div>
 </div>
 
-<form id="book_add" action="<?= base_url('admin/book_add'); ?>" method="post" class="modal" tabindex="-1">
+<form id="book_add" action="<?= base_url('admin/book_add'); ?>" method="post" class="modal needs-validation" tabindex="-1" novalidate>
     <input type="hidden" name="<?= csrf_token(); ?>" id="add_csrf" value="<?= csrf_hash(); ?>">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -77,41 +77,41 @@ use CodeIgniter\I18n\Time;
                 <?php $errors = session()->getFlashdata('errors'); ?>
                 <div class="mb-3">
                     <label for="add_name" class="form-label">Nama Buku</label>
-                    <input type="text" class="form-control" id="add_name" name="name" placeholder="Masukkan nama buku" value="<?= old('name'); ?>">
+                    <input type="text" class="form-control <?= isset($errors['name']) ? 'is-invalid' : ''; ?>" id="add_name" name="name" placeholder="Masukkan nama buku" value="<?= old('name'); ?>" required>
                     <?php if (isset($errors['name'])) : ?>
-                        <div class="alert alert-danger p-2 my-2" role="alert">
+                        <div class="text-danger">
                             <?= $errors['name']; ?>
                         </div>
                     <?php endif; ?>
                 </div>
                 <div class="mb-3">
                     <label for="add_category_id" class="form-label">Kategori</label>
-                    <select class="form-select" id="add_category_id" name="category_id">
+                    <select class="form-select <?= isset($errors['category_id']) ? 'is-invalid' : ''; ?>" id="add_category_id" name="category_id">
                         <option value="null" disabled selected>Pilih salah satu</option>
                         <?php foreach ($categories as $category) : ?>
-                            <option value="<?= $category->id; ?>" <?= old('category_id') ? 'selected' : ''; ?>><?= $category->name; ?></option>
+                            <option value="<?= $category->id; ?>" <?= old('category_id') == $category->id ? 'selected' : ''; ?>><?= $category->name; ?></option>
                         <?php endforeach; ?>
                     </select>
                     <?php if (isset($errors['category_id'])) : ?>
-                        <div class="alert alert-danger p-2 my-2" role="alert">
+                        <div class="text-danger">
                             <?= $errors['category_id']; ?>
                         </div>
                     <?php endif; ?>
                 </div>
                 <div class="mb-3">
                     <label for="add_author" class="form-label">Penulis</label>
-                    <input type="text" class="form-control" id="add_author" name="author" placeholder="Masukkan nama penulis" value="<?= old('author'); ?>">
+                    <input type="text" class="form-control <?= isset($errors['author']) ? 'is-invalid' : ''; ?>" id="add_author" name="author" placeholder="Masukkan nama penulis" value="<?= old('author'); ?>">
                     <?php if (isset($errors['author'])) : ?>
-                        <div class="alert alert-danger p-2 my-2" role="alert">
+                        <div class="text-danger">
                             <?= $errors['author']; ?>
                         </div>
                     <?php endif; ?>
                 </div>
                 <div class="mb-3">
                     <label for="add_year" class="form-label">Tahun</label>
-                    <input type="number" class="form-control" id="add_year" name="year" placeholder="Masukkan tahun" value="<?= old('year'); ?>">
+                    <input type="number" class="form-control <?= isset($errors['year']) ? 'is-invalid' : ''; ?>" id="add_year" name="year" placeholder="Masukkan tahun" value="<?= old('year'); ?>">
                     <?php if (isset($errors['year'])) : ?>
-                        <div class="alert alert-danger p-2 my-2" role="alert">
+                        <div class="text-danger">
                             <?= $errors['year']; ?>
                         </div>
                     <?php endif; ?>
@@ -127,59 +127,59 @@ use CodeIgniter\I18n\Time;
 
 <form id="book_edit" action="<?= base_url('admin/book_edit'); ?>" method="post" class="modal" data-bs-backdrop="static" tabindex="-1">
     <input type="hidden" name="<?= csrf_token(); ?>" id="edit_csrf" value="<?= csrf_hash(); ?>">
-    <input type="hidden" name="book_id" id="edit_book_id">
+    <input type="hidden" name="book_id" id="edit_book_id" value="<?= old('book_id'); ?>">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Edit Buku</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button id="btn_edit_close_1" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <?php $errors = session()->getFlashdata('errors'); ?>
                 <div class="mb-3">
                     <label for="edit_name" class="form-label">Nama Buku</label>
-                    <input type="text" class="form-control" id="edit_name" name="name" placeholder="Masukkan nama buku">
+                    <input type="text" class="form-control <?= isset($errors['name']) ? 'is-invalid' : ''; ?>" id="edit_name" name="name" placeholder="Masukkan nama buku" value="<?= old('name'); ?>">
                     <?php if (isset($errors['name'])) : ?>
-                        <div class="alert alert-danger p-2 my-2" role="alert">
+                        <div class="text-danger">
                             <?= $errors['name']; ?>
                         </div>
                     <?php endif; ?>
                 </div>
                 <div class="mb-3">
                     <label for="edit_category_id" class="form-label">Kategori</label>
-                    <select class="form-select" id="edit_category_id" name="category_id">
+                    <select class="form-select <?= isset($errors['category_id']) ? 'is-invalid' : ''; ?>" id="edit_category_id" name="category_id">
                         <option value="null" disabled selected>Pilih salah satu</option>
                         <?php foreach ($categories as $category) : ?>
-                            <option value="<?= $category->id; ?>"><?= $category->name; ?></option>
+                            <option value="<?= $category->id; ?>" <?= old('category_id') == $category->id ? 'selected' : ''; ?>><?= $category->name; ?></option>
                         <?php endforeach; ?>
                     </select>
                     <?php if (isset($errors['category_id'])) : ?>
-                        <div class="alert alert-danger p-2 my-2" role="alert">
+                        <div class="text-danger">
                             <?= $errors['category_id']; ?>
                         </div>
                     <?php endif; ?>
                 </div>
                 <div class="mb-3">
                     <label for="edit_author" class="form-label">Penulis</label>
-                    <input type="text" class="form-control" id="edit_author" name="author" placeholder="Masukkan nama penulis">
+                    <input type="text" class="form-control <?= isset($errors['author']) ? 'is-invalid' : ''; ?>" id="edit_author" name="author" placeholder="Masukkan nama penulis" value="<?= old('author'); ?>">
                     <?php if (isset($errors['author'])) : ?>
-                        <div class="alert alert-danger p-2 my-2" role="alert">
+                        <div class="text-danger">
                             <?= $errors['author']; ?>
                         </div>
                     <?php endif; ?>
                 </div>
                 <div class="mb-3">
                     <label for="edit_year" class="form-label">Tahun</label>
-                    <input type="number" class="form-control" id="edit_year" name="year" placeholder="Masukkan tahun">
+                    <input type="number" class="form-control <?= isset($errors['year']) ? 'is-invalid' : ''; ?>" id="edit_year" name="year" placeholder="Masukkan tahun" value="<?= old('year'); ?>">
                     <?php if (isset($errors['year'])) : ?>
-                        <div class="alert alert-danger p-2 my-2" role="alert">
+                        <div class="text-danger">
                             <?= $errors['year']; ?>
                         </div>
                     <?php endif; ?>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                <button id="btn_edit_close_2" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
                 <button type="submit" class="btn btn-primary">Simpan</button>
             </div>
         </div>
@@ -215,10 +215,23 @@ use CodeIgniter\I18n\Time;
         });
     });
 
+    $('input').change(function() {
+        $(this).removeClass('is-invalid');
+        $(this).siblings('.text-danger').hide();
+    });
+    $('select').change(function() {
+        $(this).removeClass('is-invalid');
+        $(this).siblings('.text-danger').hide();
+    });
+
     $(function() {
         var modal_id = window.location.hash;
         history.pushState("", document.title, window.location.pathname + window.location.search);
-        if (modal_id) $(modal_id).modal('show');
+        if (modal_id) {
+            $('#btn_edit_close_1').hide();
+            $('#btn_edit_close_2').hide();
+            $(modal_id).modal('show');
+        }
     });
 </script>
 
