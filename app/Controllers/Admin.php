@@ -59,7 +59,10 @@ class Admin extends BaseController
             'year'        => $this->request->getPost('year'),
         ];
 
-        $bookModel->update($id, $data);
+        if (!$bookModel->update($id, $data)) {
+            session()->setFlashdata('errors', $bookModel->errors());
+            return redirect()->to('/admin#book_edit')->withInput();
+        }
 
         return redirect()->to('/admin');
     }

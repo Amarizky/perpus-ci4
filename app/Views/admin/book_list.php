@@ -135,26 +135,47 @@ use CodeIgniter\I18n\Time;
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+                <?php $errors = session()->getFlashdata('errors'); ?>
                 <div class="mb-3">
                     <label for="edit_name" class="form-label">Nama Buku</label>
-                    <input type="text" class="form-control" id="edit_name" name="name" placeholder="Masukkan nama buku" required>
+                    <input type="text" class="form-control" id="edit_name" name="name" placeholder="Masukkan nama buku">
+                    <?php if (isset($errors['name'])) : ?>
+                        <div class="alert alert-danger p-2 my-2" role="alert">
+                            <?= $errors['name']; ?>
+                        </div>
+                    <?php endif; ?>
                 </div>
                 <div class="mb-3">
                     <label for="edit_category_id" class="form-label">Kategori</label>
-                    <select class="form-select" id="edit_category_id" name="category_id" required>
+                    <select class="form-select" id="edit_category_id" name="category_id">
                         <option value="null" disabled selected>Pilih salah satu</option>
                         <?php foreach ($categories as $category) : ?>
                             <option value="<?= $category->id; ?>"><?= $category->name; ?></option>
                         <?php endforeach; ?>
                     </select>
+                    <?php if (isset($errors['category_id'])) : ?>
+                        <div class="alert alert-danger p-2 my-2" role="alert">
+                            <?= $errors['category_id']; ?>
+                        </div>
+                    <?php endif; ?>
                 </div>
                 <div class="mb-3">
                     <label for="edit_author" class="form-label">Penulis</label>
-                    <input type="text" class="form-control" id="edit_author" name="author" placeholder="Masukkan nama penulis" required>
+                    <input type="text" class="form-control" id="edit_author" name="author" placeholder="Masukkan nama penulis">
+                    <?php if (isset($errors['author'])) : ?>
+                        <div class="alert alert-danger p-2 my-2" role="alert">
+                            <?= $errors['author']; ?>
+                        </div>
+                    <?php endif; ?>
                 </div>
                 <div class="mb-3">
                     <label for="edit_year" class="form-label">Tahun</label>
-                    <input type="number" class="form-control" id="edit_year" name="year" placeholder="Masukkan tahun" required>
+                    <input type="number" class="form-control" id="edit_year" name="year" placeholder="Masukkan tahun">
+                    <?php if (isset($errors['year'])) : ?>
+                        <div class="alert alert-danger p-2 my-2" role="alert">
+                            <?= $errors['year']; ?>
+                        </div>
+                    <?php endif; ?>
                 </div>
             </div>
             <div class="modal-footer">
