@@ -32,8 +32,6 @@ class Admin extends BaseController
         $author = $this->request->getPost('author');
         $year = $this->request->getPost('year');
 
-        if (!$name || !$category_id || !$author || !$year) return redirect()->to('/admin');
-
         $bookModel = new BookModel();
         $data      = [
             'name'        => $name,
@@ -42,7 +40,10 @@ class Admin extends BaseController
             'year'        => $year,
         ];
 
-        $bookModel->insert($data);
+        if (!$bookModel->insert($data)) {
+            session()->setFlashdata('errors', $bookModel->errors());
+            return redirect()->to('/admin#book_add')->withInput();
+        }
 
         return redirect()->to('/admin');
     }

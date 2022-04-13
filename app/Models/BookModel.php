@@ -24,8 +24,30 @@ class BookModel extends Model
     protected $deletedField  = 'deleted_at';
 
     // Validation
-    protected $validationRules      = [];
-    protected $validationMessages   = [];
+    protected $validationRules      = [
+        'name'           => 'required',
+        'category_id'    => 'required|is_natural',
+        'author'         => 'required',
+        'year'           => 'required|is_natural|min_length[4]|max_length[4]',
+    ];
+    protected $validationMessages   = [
+        'name'           => [
+            'required'   => 'Nama belum diisi',
+        ],
+        'category_id'    => [
+            'required'   => 'Kategori belum dipilih',
+            'is_natural' => 'Kategori belum dipilih',
+        ],
+        'author'         => [
+            'required'   => 'Penulis belum diisi',
+        ],
+        'year'           => [
+            'required'   => 'Tahun belum diisi',
+            'is_natural' => 'Tahun harus diisi angka',
+            'min_length' => 'Tahun tidak boleh kurang dari 4 angka',
+            'max_length' => 'Tahun tidak boleh lebih dari 4 angka',
+        ]
+    ];
     protected $skipValidation       = false;
     protected $cleanValidationRules = true;
 

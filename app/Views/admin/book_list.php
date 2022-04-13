@@ -71,29 +71,50 @@ use CodeIgniter\I18n\Time;
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Tambah Buku</h5>
-                <button class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+                <?php $errors = session()->getFlashdata('errors'); ?>
                 <div class="mb-3">
                     <label for="add_name" class="form-label">Nama Buku</label>
-                    <input type="text" class="form-control" id="add_name" name="name" placeholder="Masukkan nama buku" required>
+                    <input type="text" class="form-control" id="add_name" name="name" placeholder="Masukkan nama buku" value="<?= old('name'); ?>">
+                    <?php if (isset($errors['name'])) : ?>
+                        <div class="alert alert-danger p-2 my-2" role="alert">
+                            <?= $errors['name']; ?>
+                        </div>
+                    <?php endif; ?>
                 </div>
                 <div class="mb-3">
                     <label for="add_category_id" class="form-label">Kategori</label>
-                    <select class="form-select" id="add_category_id" name="category_id" required>
+                    <select class="form-select" id="add_category_id" name="category_id">
                         <option value="null" disabled selected>Pilih salah satu</option>
                         <?php foreach ($categories as $category) : ?>
-                            <option value="<?= $category->id; ?>"><?= $category->name; ?></option>
+                            <option value="<?= $category->id; ?>" <?= old('category_id') ? 'selected' : ''; ?>><?= $category->name; ?></option>
                         <?php endforeach; ?>
                     </select>
+                    <?php if (isset($errors['category_id'])) : ?>
+                        <div class="alert alert-danger p-2 my-2" role="alert">
+                            <?= $errors['category_id']; ?>
+                        </div>
+                    <?php endif; ?>
                 </div>
                 <div class="mb-3">
                     <label for="add_author" class="form-label">Penulis</label>
-                    <input type="text" class="form-control" id="add_author" name="author" placeholder="Masukkan nama penulis" required>
+                    <input type="text" class="form-control" id="add_author" name="author" placeholder="Masukkan nama penulis" value="<?= old('author'); ?>">
+                    <?php if (isset($errors['author'])) : ?>
+                        <div class="alert alert-danger p-2 my-2" role="alert">
+                            <?= $errors['author']; ?>
+                        </div>
+                    <?php endif; ?>
                 </div>
                 <div class="mb-3">
                     <label for="add_year" class="form-label">Tahun</label>
-                    <input type="number" class="form-control" id="add_year" name="year" placeholder="Masukkan tahun" required>
+                    <input type="number" class="form-control" id="add_year" name="year" placeholder="Masukkan tahun" value="<?= old('year'); ?>">
+                    <?php if (isset($errors['year'])) : ?>
+                        <div class="alert alert-danger p-2 my-2" role="alert">
+                            <?= $errors['year']; ?>
+                        </div>
+                    <?php endif; ?>
                 </div>
             </div>
             <div class="modal-footer">
@@ -171,7 +192,13 @@ use CodeIgniter\I18n\Time;
                 $('#edit_year').val(data.year);
             },
         });
-    })
+    });
+
+    $(function() {
+        var modal_id = window.location.hash;
+        history.pushState("", document.title, window.location.pathname + window.location.search);
+        if (modal_id) $(modal_id).modal('show');
+    });
 </script>
 
 <?= $this->endSection('content'); ?>
