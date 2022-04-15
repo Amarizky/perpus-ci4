@@ -41,6 +41,7 @@ class Admin extends BaseController
         ];
 
         if (!$bookModel->insert($data)) {
+            session()->setFlashdata('errorFor', 'add');
             session()->setFlashdata('errors', $bookModel->errors());
             return redirect()->to('/admin/books#book_add')->withInput();
         }
@@ -69,6 +70,7 @@ class Admin extends BaseController
         ];
 
         if (!$bookModel->update($id, $data)) {
+            session()->setFlashdata('errorFor', 'edit');
             session()->setFlashdata('errors', $bookModel->errors());
             return redirect()->to('/admin/books#book_edit')->withInput();
         }

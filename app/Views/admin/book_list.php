@@ -91,11 +91,12 @@ use CodeIgniter\I18n\Time;
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+                <?php $error = session()->getFlashdata('errorFor') == 'add'; ?>
                 <?php $errors = session()->getFlashdata('errors'); ?>
                 <div class="mb-3">
                     <label for="add_title" class="form-label">Judul Buku</label>
-                    <input type="text" class="form-control <?= isset($errors['title']) ? 'is-invalid' : ''; ?>" id="add_title" name="title" placeholder="Masukkan judul buku" value="<?= old('title'); ?>" required>
-                    <?php if (isset($errors['title'])) : ?>
+                    <input type="text" class="form-control <?= $error && isset($errors['title']) ? 'is-invalid' : ''; ?>" id="add_title" name="title" placeholder="Masukkan judul buku" value="<?= old('title'); ?>" required>
+                    <?php if ($error && isset($errors['title'])) : ?>
                         <div class="text-danger">
                             <?= $errors['title']; ?>
                         </div>
@@ -103,13 +104,13 @@ use CodeIgniter\I18n\Time;
                 </div>
                 <div class="mb-3">
                     <label for="add_category_id" class="form-label">Kategori</label>
-                    <select class="form-select <?= isset($errors['category_id']) ? 'is-invalid' : ''; ?>" id="add_category_id" name="category_id">
+                    <select class="form-select <?= $error && isset($errors['category_id']) ? 'is-invalid' : ''; ?>" id="add_category_id" name="category_id">
                         <option value="null" disabled selected>Pilih salah satu</option>
                         <?php foreach ($categories as $category) : ?>
                             <option value="<?= $category->id; ?>" <?= old('category_id') == $category->id ? 'selected' : ''; ?>><?= $category->name; ?></option>
                         <?php endforeach; ?>
                     </select>
-                    <?php if (isset($errors['category_id'])) : ?>
+                    <?php if ($error && isset($errors['category_id'])) : ?>
                         <div class="text-danger">
                             <?= $errors['category_id']; ?>
                         </div>
@@ -117,8 +118,8 @@ use CodeIgniter\I18n\Time;
                 </div>
                 <div class="mb-3">
                     <label for="add_author" class="form-label">Penulis</label>
-                    <input type="text" class="form-control <?= isset($errors['author']) ? 'is-invalid' : ''; ?>" id="add_author" name="author" placeholder="Masukkan nama penulis" value="<?= old('author'); ?>">
-                    <?php if (isset($errors['author'])) : ?>
+                    <input type="text" class="form-control <?= $error && isset($errors['author']) ? 'is-invalid' : ''; ?>" id="add_author" name="author" placeholder="Masukkan nama penulis" value="<?= old('author'); ?>">
+                    <?php if ($error && isset($errors['author'])) : ?>
                         <div class="text-danger">
                             <?= $errors['author']; ?>
                         </div>
@@ -126,8 +127,8 @@ use CodeIgniter\I18n\Time;
                 </div>
                 <div class="mb-3">
                     <label for="add_year" class="form-label">Tahun</label>
-                    <input type="number" class="form-control <?= isset($errors['year']) ? 'is-invalid' : ''; ?>" id="add_year" name="year" placeholder="Masukkan tahun" value="<?= old('year'); ?>">
-                    <?php if (isset($errors['year'])) : ?>
+                    <input type="number" class="form-control <?= $error && isset($errors['year']) ? 'is-invalid' : ''; ?>" id="add_year" name="year" placeholder="Masukkan tahun" value="<?= old('year'); ?>">
+                    <?php if ($error && isset($errors['year'])) : ?>
                         <div class="text-danger">
                             <?= $errors['year']; ?>
                         </div>
@@ -152,11 +153,12 @@ use CodeIgniter\I18n\Time;
                 <button id="btn_edit_close_1" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+                <?php $error = session()->getFlashdata('errorFor') == 'edit'; ?>
                 <?php $errors = session()->getFlashdata('errors'); ?>
                 <div class="mb-3">
                     <label for="edit_title" class="form-label">Judul Buku</label>
-                    <input type="text" class="form-control <?= isset($errors['title']) ? 'is-invalid' : ''; ?>" id="edit_title" name="title" placeholder="Masukkan judul buku" value="<?= old('title'); ?>">
-                    <?php if (isset($errors['title'])) : ?>
+                    <input type="text" class="form-control <?= $error && isset($errors['title']) ? 'is-invalid' : ''; ?>" id="edit_title" name="title" placeholder="Masukkan judul buku" value="<?= old('title'); ?>">
+                    <?php if ($error && isset($errors['title'])) : ?>
                         <div class="text-danger">
                             <?= $errors['title']; ?>
                         </div>
@@ -164,13 +166,13 @@ use CodeIgniter\I18n\Time;
                 </div>
                 <div class="mb-3">
                     <label for="edit_category_id" class="form-label">Kategori</label>
-                    <select class="form-select <?= isset($errors['category_id']) ? 'is-invalid' : ''; ?>" id="edit_category_id" name="category_id">
+                    <select class="form-select <?= $error && isset($errors['category_id']) ? 'is-invalid' : ''; ?>" id="edit_category_id" name="category_id">
                         <option value="null" disabled selected>Pilih salah satu</option>
                         <?php foreach ($categories as $category) : ?>
                             <option value="<?= $category->id; ?>" <?= old('category_id') == $category->id ? 'selected' : ''; ?>><?= $category->name; ?></option>
                         <?php endforeach; ?>
                     </select>
-                    <?php if (isset($errors['category_id'])) : ?>
+                    <?php if ($error && isset($errors['category_id'])) : ?>
                         <div class="text-danger">
                             <?= $errors['category_id']; ?>
                         </div>
@@ -178,8 +180,8 @@ use CodeIgniter\I18n\Time;
                 </div>
                 <div class="mb-3">
                     <label for="edit_author" class="form-label">Penulis</label>
-                    <input type="text" class="form-control <?= isset($errors['author']) ? 'is-invalid' : ''; ?>" id="edit_author" name="author" placeholder="Masukkan nama penulis" value="<?= old('author'); ?>">
-                    <?php if (isset($errors['author'])) : ?>
+                    <input type="text" class="form-control <?= $error && isset($errors['author']) ? 'is-invalid' : ''; ?>" id="edit_author" name="author" placeholder="Masukkan nama penulis" value="<?= old('author'); ?>">
+                    <?php if ($error && isset($errors['author'])) : ?>
                         <div class="text-danger">
                             <?= $errors['author']; ?>
                         </div>
@@ -187,8 +189,8 @@ use CodeIgniter\I18n\Time;
                 </div>
                 <div class="mb-3">
                     <label for="edit_year" class="form-label">Tahun</label>
-                    <input type="number" class="form-control <?= isset($errors['year']) ? 'is-invalid' : ''; ?>" id="edit_year" name="year" placeholder="Masukkan tahun" value="<?= old('year'); ?>">
-                    <?php if (isset($errors['year'])) : ?>
+                    <input type="number" class="form-control <?= $error && isset($errors['year']) ? 'is-invalid' : ''; ?>" id="edit_year" name="year" placeholder="Masukkan tahun" value="<?= old('year'); ?>">
+                    <?php if ($error && isset($errors['year'])) : ?>
                         <div class="text-danger">
                             <?= $errors['year']; ?>
                         </div>
@@ -295,11 +297,12 @@ use CodeIgniter\I18n\Time;
     $(function() {
         var modal_id = window.location.hash;
         history.pushState("", document.title, window.location.pathname + window.location.search);
-        if (modal_id) {
+        if (modal_id == '#book_edit') {
             $('#btn_edit_close_1').hide();
             $('#btn_edit_close_2').hide();
-            $(modal_id).modal('show');
         }
+        if (modal_id) $(modal_id).modal('show');
+
         $('.toast').toast('show');
     });
 </script>
