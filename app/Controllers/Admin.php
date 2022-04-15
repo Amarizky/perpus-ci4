@@ -16,7 +16,7 @@ class Admin extends BaseController
         $page          = $this->request->getGet('page') ?? 1;
         $bookList      = $bookModel->getAllBooks();
 
-        return view('admin/book_list', [
+        return view('admin/books', [
             'pageTitle'   => 'Daftar Buku',
             'bookList'    => $bookList->paginate(20),
             'pager'       => $bookList->pager,
