@@ -39,7 +39,7 @@ class Login extends BaseController
 
         $adminModel = new \App\Models\AdminModel();
         if ($adminModel->verifyLogin($username, $password)) {
-            return redirect()->to('/admin');
+            return redirect()->to('/admin/books');
         } else {
             session()->setFlashdata([
                 'alert' => [
