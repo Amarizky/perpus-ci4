@@ -48,7 +48,7 @@ class CategoryModel extends Model
 
     function getCategoryId($name)
     {
-        if ($cat = $this->where('name', $name)->orWhere('alias', $name)->find()) return $cat[0]['id'];
+        if ($cat = $this->where('name', $name)->find()) return $cat[0]['id'];
         return null;
     }
 }
