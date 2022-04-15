@@ -42,17 +42,17 @@ class VisitorModel extends Model
 
     function visit($name, $classroom)
     {
-        $student = $this->where('name', $name)
+        $visitor = $this->where('name', $name)
             ->where('classroom', $classroom)
             ->find();
 
-        if ($student) {
-            $student = $student[0];
+        if ($visitor) {
+            $visitor = $visitor[0];
             session()->set('name', $name);
             session()->set('classroom', $classroom);
             session()->set('admin', false);
 
-            return $this->update($student['id'], ['visited' => $student['visited'] + 1]);
+            return $this->update($visitor['id'], ['visited' => $visitor['visited'] + 1]);
         } else {
             return $this->insert([
                 'name' => $name,

@@ -21,7 +21,7 @@ class Login extends BaseController
         return view('login', $data);
     }
 
-    public function login_student()
+    public function login_visitor()
     {
         $name      = ucwords($this->request->getPost('name'));
         $classroom = strtoupper($this->request->getPost('classroom'));
@@ -29,7 +29,7 @@ class Login extends BaseController
         $visitorModel = new \App\Models\VisitorModel();
         $visitorModel->visit($name, $classroom);
 
-        return redirect()->to('/student');
+        return redirect()->to('/visitor');
     }
 
     public function login_admin()

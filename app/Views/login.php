@@ -12,7 +12,7 @@
                 <div class="card-header">
                     <ul class="nav nav-tabs card-header-tabs">
                         <li class="nav-item">
-                            <button id="btn-pelajar" type="button" class="nav-link <?= $alert ? '' : 'active'; ?>" data-bs-target="#login-card" data-bs-slide-to="0" aria-current="true" href="#pelajar">Pelajar</button>
+                            <button id="btn-pengunjung" type="button" class="nav-link <?= $alert ? '' : 'active'; ?>" data-bs-target="#login-card" data-bs-slide-to="0" aria-current="true" href="#pengunjung">Pengunjung</button>
                         </li>
                         <li class="nav-item">
                             <button id="btn-admin" type="button" class="nav-link <?= $alert ? 'active' : ''; ?>" data-bs-target="#login-card" data-bs-slide-to="1" aria-current="true" href="#admin">Admin</button>
@@ -21,11 +21,12 @@
                 </div>
                 <div class="card-body carousel-inner">
                     <div class="carousel-item <?= $alert ? '' : 'active'; ?>">
-                        <form method="post" action="<?= base_url('Login/login_student'); ?>">
+                        <form method="post" action="<?= base_url('Login/login_visitor'); ?>">
                             <?= csrf_field(); ?>
                             <div class="mb-3">
                                 <label for="name" class="form-label">Nama</label>
                                 <input type="text" class="form-control" name="name" placeholder="Masukkan namamu">
+                                <!-- Todo: <datalist> -->
                             </div>
                             <div class="mb-3">
                                 <label for="classroom" class="form-label">Kelas</label>

@@ -35,8 +35,8 @@ $routes->get('/', 'Login::index');
 $routes->get('/admin/books', 'Admin::index');
 $routes->get('/admin/categories', 'Admin::categories');
 $routes->get('/admin/visitors', 'Admin::visitors');
-$routes->get('/student/borrow', 'Student::borrow');
-$routes->get('/student/return', 'Student::return');
+$routes->get('/visitor/borrow', 'Visitor::borrow');
+$routes->get('/visitor/return', 'Visitor::return');
 $routes->get('/logout', 'Login::logout');
 
 /*
