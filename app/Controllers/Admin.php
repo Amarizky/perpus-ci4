@@ -27,14 +27,14 @@ class Admin extends BaseController
 
     public function book_add()
     {
-        $name        = $this->request->getPost('name');
+        $title       = $this->request->getPost('title');
         $category_id = $this->request->getPost('category_id');
         $author      = $this->request->getPost('author');
         $year        = $this->request->getPost('year');
 
         $bookModel = new BookModel();
         $data      = [
-            'name'        => $name,
+            'title'        => $title,
             'category_id' => $category_id,
             'author'      => $author,
             'year'        => $year,
@@ -47,7 +47,7 @@ class Admin extends BaseController
 
         session()->setFlashdata('toast', [
             'title' => 'Buku',
-            'message' => "Buku berjudul \"{$name}\" berhasil ditambahkan",
+            'message' => "Buku berjudul \"{$title}\" berhasil ditambahkan",
         ]);
         return redirect()->to('/admin');
     }
@@ -55,14 +55,14 @@ class Admin extends BaseController
     public function book_edit()
     {
         $id          = $this->request->getPost('book_id');
-        $name        = $this->request->getPost('name');
+        $title       = $this->request->getPost('title');
         $category_id = $this->request->getPost('category_id');
         $author      = $this->request->getPost('author');
         $year        = $this->request->getPost('year');
 
         $bookModel = new BookModel();
         $data      = [
-            'name'        => $name,
+            'title'        => $title,
             'category_id' => $category_id,
             'author'      => $author,
             'year'        => $year,
@@ -75,7 +75,7 @@ class Admin extends BaseController
 
         session()->setFlashdata('toast', [
             'title' => 'Buku',
-            'message' => "Buku berjudul \"{$name}\" berhasil diedit",
+            'message' => "Buku berjudul \"{$title}\" berhasil diedit",
         ]);
         return redirect()->to('/admin');
     }
@@ -89,7 +89,7 @@ class Admin extends BaseController
 
         session()->setFlashdata('toast', [
             'title' => 'Buku',
-            'message' => "Buku berjudul \"{$book->name}\" berhasil dihapus",
+            'message' => "Buku berjudul \"{$book->title}\" berhasil dihapus",
         ]);
         return redirect()->to('/admin');
     }

@@ -42,15 +42,15 @@ use CodeIgniter\I18n\Time;
             <table class="table table-striped table-bordered">
                 <thead>
                     <tr>
-                        <th scope="col" style="width: 52px;" class="text-center">#</th>
-                        <th scope="col" style="width: 340px;">Nama Buku</th>
-                        <th scope="col" style="width: 120px;">Kategori</th>
-                        <th scope="col" style="width: 160px;">Penulis</th>
-                        <th scope="col" style="width: 62px;" class="text-center">Tahun Terbit</th>
-                        <th scope="col" class="text-center">Dipinjam?</th>
-                        <th scope="col" style="width: 100px;">Tanggal Pinjam</th>
-                        <th scope="col" style="width: 100px;">Tanggal Kembali</th>
-                        <th scope="col" style="width: 150px;" class="text-center">Aksi</th>
+                        <th scope="col" style="width: 4%;" class="text-center">#</th>
+                        <th scope="col" style="width: 28%;">Judul Buku</th>
+                        <th scope="col" style="width: 9%;">Kategori</th>
+                        <th scope="col" style="width: 12%;">Penulis</th>
+                        <th scope="col" style="width: 5%;" class="text-center">Tahun Terbit</th>
+                        <th scope="col" style="width: 14%;" class="text-center">Dipinjam?</th>
+                        <th scope="col" style="width: 8%;" class="text-center">Tanggal Pinjam</th>
+                        <th scope="col" style="width: 8%;" class="text-center">Tanggal Kembali</th>
+                        <th scope="col" style="width: 12%;" class="text-center">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -58,16 +58,16 @@ use CodeIgniter\I18n\Time;
                     <?php foreach ($bookList as $b) : ?>
                         <tr style="height: 66px;">
                             <td class="align-middle text-center"><?= $i++; ?></td>
-                            <td class="align-middle"><?= $b->name; ?></td>
+                            <td class="align-middle"><?= $b->title; ?></td>
                             <td class="align-middle"><?= $b->category; ?></td>
                             <td class="align-middle"><?= $b->author; ?></td>
                             <td class="align-middle text-center"><?= $b->year; ?></td>
                             <td class="align-middle text-center"><?= str_replace('-', '<br>', $b->loaned_to ?? 'Tidak'); ?></td>
-                            <td class="align-middle"><?= $b->loaned_at ? 'Jam ' . str_replace(' ', "<br>", Time::createFromTimestamp($b->loaned_at)->toLocalizedString('HH:m d-MM-Y')) : '-'; ?></td>
-                            <td class="align-middle"><?= $b->returns_in ? Time::createFromTimestamp($b->returns_in)->toLocalizedString('d-MM-Y') : '-'; ?></td>
+                            <td class="align-middle text-center"><?= $b->loaned_at ? 'Jam ' . str_replace(' ', "<br>", Time::createFromTimestamp($b->loaned_at)->toLocalizedString('HH:m d-MM-Y')) : '-'; ?></td>
+                            <td class="align-middle text-center"><?= $b->returns_in ? Time::createFromTimestamp($b->returns_in)->toLocalizedString('d-MM-Y') : '-'; ?></td>
                             <td class="align-middle text-center">
                                 <a href="#" data-book-id="<?= $b->id; ?>" data-bs-toggle="modal" data-bs-target="#book_edit" style="width: 58px;" class="btn btn-sm btn-success btn-edit">Edit</a>
-                                <a href="#" data-book-id="<?= $b->id; ?>" data-book-title="<?= $b->name; ?>" data-book-category="<?= $b->category; ?>" data-book-author="<?= $b->author; ?>" data-book-year="<?= $b->year; ?>" data-bs-toggle="modal" data-bs-target="#book_delete" style="width: 58px;" class="btn btn-sm btn-warning btn-delete">Hapus</a>
+                                <a href="#" data-book-id="<?= $b->id; ?>" data-book-title="<?= $b->title; ?>" data-book-category="<?= $b->category; ?>" data-book-author="<?= $b->author; ?>" data-book-year="<?= $b->year; ?>" data-bs-toggle="modal" data-bs-target="#book_delete" style="width: 58px;" class="btn btn-sm btn-warning btn-delete">Hapus</a>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -87,17 +87,17 @@ use CodeIgniter\I18n\Time;
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Tambah Buku</h5>
+                <h5 class="modal-title">Tambah buku baru</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <?php $errors = session()->getFlashdata('errors'); ?>
                 <div class="mb-3">
-                    <label for="add_name" class="form-label">Nama Buku</label>
-                    <input type="text" class="form-control <?= isset($errors['name']) ? 'is-invalid' : ''; ?>" id="add_name" name="name" placeholder="Masukkan nama buku" value="<?= old('name'); ?>" required>
-                    <?php if (isset($errors['name'])) : ?>
+                    <label for="add_title" class="form-label">Judul Buku</label>
+                    <input type="text" class="form-control <?= isset($errors['title']) ? 'is-invalid' : ''; ?>" id="add_title" name="title" placeholder="Masukkan judul buku" value="<?= old('title'); ?>" required>
+                    <?php if (isset($errors['title'])) : ?>
                         <div class="text-danger">
-                            <?= $errors['name']; ?>
+                            <?= $errors['title']; ?>
                         </div>
                     <?php endif; ?>
                 </div>
@@ -154,11 +154,11 @@ use CodeIgniter\I18n\Time;
             <div class="modal-body">
                 <?php $errors = session()->getFlashdata('errors'); ?>
                 <div class="mb-3">
-                    <label for="edit_name" class="form-label">Nama Buku</label>
-                    <input type="text" class="form-control <?= isset($errors['name']) ? 'is-invalid' : ''; ?>" id="edit_name" name="name" placeholder="Masukkan nama buku" value="<?= old('name'); ?>">
-                    <?php if (isset($errors['name'])) : ?>
+                    <label for="edit_title" class="form-label">Judul Buku</label>
+                    <input type="text" class="form-control <?= isset($errors['title']) ? 'is-invalid' : ''; ?>" id="edit_title" name="title" placeholder="Masukkan judul buku" value="<?= old('title'); ?>">
+                    <?php if (isset($errors['title'])) : ?>
                         <div class="text-danger">
-                            <?= $errors['name']; ?>
+                            <?= $errors['title']; ?>
                         </div>
                     <?php endif; ?>
                 </div>
@@ -215,23 +215,23 @@ use CodeIgniter\I18n\Time;
             <div class="modal-body">
                 <table>
                     <tr>
-                        <td>Nama</td>
-                        <td> : </td>
+                        <td class="align-top" style="width: 100px;">Judul buku</td>
+                        <td class="align-top"> : </td>
                         <td id="delete_book_title"></td>
                     </tr>
                     <tr>
-                        <td>Kategori</td>
-                        <td> : </td>
+                        <td class="align-top">Kategori</td>
+                        <td class="align-top"> : </td>
                         <td id="delete_book_category"></td>
                     </tr>
                     <tr>
-                        <td>Penulis</td>
-                        <td> : </td>
+                        <td class="align-top">Penulis</td>
+                        <td class="align-top"> : </td>
                         <td id="delete_book_author"></td>
                     </tr>
                     <tr>
-                        <td>Tahun</td>
-                        <td> : </td>
+                        <td class="align-top">Tahun</td>
+                        <td class="align-top"> : </td>
                         <td id="delete_book_year"></td>
                     </tr>
                 </table>
@@ -267,7 +267,7 @@ use CodeIgniter\I18n\Time;
                 $('#add_csrf').val(data.csrf);
 
                 $('#edit_book_id').val(data.id);
-                $('#edit_name').val(data.name);
+                $('#edit_title').val(data.title);
                 $('#edit_category_id').val(data.category_id).change();
                 $('#edit_author').val(data.author);
                 $('#edit_year').val(data.year);

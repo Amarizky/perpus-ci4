@@ -14,7 +14,7 @@ class BookModel extends Model
     protected $returnType       = 'object';
     protected $useSoftDeletes   = true;
     protected $protectFields    = true;
-    protected $allowedFields    = ['name', 'category_id', 'author', 'year'];
+    protected $allowedFields    = ['title', 'category_id', 'author', 'year'];
 
     // Dates
     protected $useTimestamps = true;
@@ -25,13 +25,13 @@ class BookModel extends Model
 
     // Validation
     protected $validationRules      = [
-        'name'           => 'required',
+        'title'          => 'required',
         'category_id'    => 'required|is_natural',
         'author'         => 'required',
         'year'           => 'required|is_natural|min_length[4]|max_length[4]',
     ];
     protected $validationMessages   = [
-        'name'           => [
+        'title'          => [
             'required'   => 'Nama belum diisi',
         ],
         'category_id'    => [
@@ -65,12 +65,12 @@ class BookModel extends Model
     function getAllBooks()
     {
         return $this
-            ->select('books.id, books.name, c.name category, books.author, books.year, CONCAT(v.classroom, "-", v.name) loaned_to, l.created_at loaned_at, l.created_at + (7*86400) returns_in')
+            ->select('books.id, books.title, c.name category, books.author, books.year, CONCAT(v.classroom, "-", v.name) loaned_to, l.created_at loaned_at, l.created_at + (7*86400) returns_in')
             ->from('books', true)
             ->join('loans l', 'books.id=l.book_id', 'left')
             ->join('visitors v', 'l.loaned_to=v.id', 'left')
             ->join('categories c', 'books.category_id=c.id', 'left')
             ->orderBy('l.loaned_to', 'DESC')
-            ->orderBy('books.name');
+            ->orderBy('books.title');
     }
 }
