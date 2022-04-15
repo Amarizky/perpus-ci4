@@ -44,21 +44,31 @@ class VisitorModel extends Model
     {
         $visitor = $this->where('name', $name)
             ->where('classroom', $classroom)
-            ->find();
+            ->find()[0];
 
-        if ($visitor) {
-            $visitor = $visitor[0];
-            session()->set('name', $name);
-            session()->set('classroom', $classroom);
-            session()->set('admin', false);
-
-            return $this->update($visitor['id'], ['visited' => $visitor['visited'] + 1]);
-        } else {
-            return $this->insert([
+        if (!$visitor) {
+            $this->insert([
                 'name' => $name,
                 'classroom' => $classroom,
-                'visited' => 1
+                'visited' => 0
             ]);
+            $visitor = $this->where('name', $name)
+                ->where('classroom', $classroom)
+                ->find()[0];
         }
+
+        helper('text');
+        $sessionToken = random_string('alnum', 64);
+        $this->update($visitor->id, [
+            'session' => $sessionToken,
+            'visited' => $visitor->visited + 1
+        ]);
+        session()->set('session', $sessionToken);
+        session()->set('admin', false);
+    }
+
+    function check(): bool
+    {
+        return count($this->where('session', session()->get('session'))->limit(1)->find());
     }
 }
