@@ -51,4 +51,15 @@ class LoanModel extends Model
             'book_id'   => $book_id,
         ]);
     }
+
+    function return($book_id = 0)
+    {
+        $visitorModel = new VisitorModel();
+        $visitor = $visitorModel->getVisitor()->getRow();
+
+        $this->where([
+            'loaned_to' => $visitor->id,
+            'book_id'   => $book_id,
+        ])->delete();
+    }
 }

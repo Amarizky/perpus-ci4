@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
+use App\Models\VisitorModel;
 
 class BookModel extends Model
 {
@@ -69,6 +70,22 @@ class BookModel extends Model
             ->from('books', true)
             ->join('loans l', 'books.id=l.book_id', 'left')
             ->join('visitors v', 'l.loaned_to=v.id', 'left')
-            ->join('categories c', 'books.category_id=c.id', 'left');
+            ->join('categories c', 'books.category_id=c.id', 'left')
+            ->where('books.deleted_at', null);
+    }
+
+    function getBorrowedBooks()
+    {
+        $visitorModel = new VisitorModel();
+        $visitor = $visitorModel->getVisitor()->getRow();
+
+        return $this
+            ->select('books.id, books.title, c.name category, books.author, books.year, CONCAT(v.classroom, "-", v.name) loaned_to, l.created_at loaned_at, l.created_at + (7*86400) returns_in')
+            ->from('books', true)
+            ->join('loans l', 'books.id=l.book_id', 'left')
+            ->join('visitors v', 'l.loaned_to=v.id', 'left')
+            ->join('categories c', 'books.category_id=c.id', 'left')
+            ->where('l.loaned_to', $visitor->id)
+            ->where('l.deleted_at', null);
     }
 }
