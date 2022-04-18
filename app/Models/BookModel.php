@@ -69,8 +69,6 @@ class BookModel extends Model
             ->from('books', true)
             ->join('loans l', 'books.id=l.book_id', 'left')
             ->join('visitors v', 'l.loaned_to=v.id', 'left')
-            ->join('categories c', 'books.category_id=c.id', 'left')
-            ->orderBy('l.loaned_to', 'DESC')
-            ->orderBy('books.title');
+            ->join('categories c', 'books.category_id=c.id', 'left');
     }
 }

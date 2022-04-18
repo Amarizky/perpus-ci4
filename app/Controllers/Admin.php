@@ -14,7 +14,10 @@ class Admin extends BaseController
         $categoryModel = new CategoryModel();
 
         $page          = $this->request->getGet('page') ?? 1;
-        $bookList      = $bookModel->getAllBooks();
+        $bookList      = $bookModel
+            ->getAllBooks()
+            ->orderBy('l.loaned_to', 'DESC')
+            ->orderBy('books.title');
 
         return view('admin/books', [
             'pageTitle'   => 'Daftar Buku',
