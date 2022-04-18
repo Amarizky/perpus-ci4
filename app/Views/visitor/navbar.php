@@ -7,7 +7,7 @@
         <div class="collapse navbar-collapse" id="navbar-visitor">
             <ul class="navbar-nav my-2 my-lg-0">
                 <li class="nav-item">
-                    <a href="/visitor/dashboard" class="nav-link <?= $seg[1] == 'dashboard' ? 'active' : ''; ?>">Dashboard</a>
+                    <a href="/visitor" class="nav-link <?= $seg[1] == 'dashboard' ? 'active' : ''; ?>">Dashboard</a>
                 </li>
                 <li class="nav-item">
                     <a href="/visitor/borrow" class="nav-link <?= $seg[1] == 'borrow' ? 'active' : ''; ?>">Pinjam Buku</a>
