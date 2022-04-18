@@ -67,6 +67,11 @@ class VisitorModel extends Model
         session()->set('admin', false);
     }
 
+    function getVisitor()
+    {
+        return $this->where('session', session()->get('session'))->get();
+    }
+
     function check(): bool
     {
         return count($this->where('session', session()->get('session'))->limit(1)->find());

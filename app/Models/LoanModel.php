@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
+use \App\Models\VisitorModel;
 
 class LoanModel extends Model
 {
@@ -39,4 +40,15 @@ class LoanModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    function borrow($book_id = 0)
+    {
+        $visitorModel = new VisitorModel();
+        $visitor = $visitorModel->getVisitor()->getRow();
+
+        $this->insert([
+            'loaned_to' => $visitor->id,
+            'book_id'   => $book_id,
+        ]);
+    }
 }
