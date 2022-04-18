@@ -43,11 +43,11 @@ use CodeIgniter\I18n\Time;
                 <thead>
                     <tr>
                         <th scope="col" style="width: 4%;" class="text-center">#</th>
-                        <th scope="col" style="width: 28%;">Judul Buku</th>
+                        <th scope="col">Judul Buku</th>
                         <th scope="col" style="width: 9%;">Kategori</th>
                         <th scope="col" style="width: 12%;">Penulis</th>
                         <th scope="col" style="width: 5%;" class="text-center">Tahun Terbit</th>
-                        <th scope="col" style="width: 14%;" class="text-center">Dipinjam?</th>
+                        <th scope="col" class="text-center">Dipinjam?</th>
                         <th scope="col" style="width: 8%;" class="text-center">Tanggal Pinjam</th>
                         <th scope="col" style="width: 8%;" class="text-center">Tanggal Kembali</th>
                         <th scope="col" style="width: 12%;" class="text-center">Aksi</th>
@@ -136,8 +136,8 @@ use CodeIgniter\I18n\Time;
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                <button type="submit" class="btn btn-primary">Tambah</button>
+                <button type="button" class="btn btn-secondary" style="width: 70px;" data-bs-dismiss="modal">Tutup</button>
+                <button type="submit" class="btn btn-primary" style="width: 70px;">Tambah</button>
             </div>
         </div>
     </div>
@@ -241,8 +241,8 @@ use CodeIgniter\I18n\Time;
                 <p>Apakah Anda yakin ingin menghapus buku tersebut dari database?</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tidak</button>
-                <button type="submit" class="btn btn-danger">Ya</button>
+                <button type="button" class="btn btn-secondary" style="width: 70px;" data-bs-dismiss="modal">Tidak</button>
+                <button type="submit" class="btn btn-danger" style="width: 70px;">Ya</button>
             </div>
         </div>
     </div>
