@@ -1,7 +1,7 @@
 <?= $this->extend('layout'); ?>
 <?= $this->section('content'); ?>
 
-<?= $this->include('navbar-admin'); ?>
+<?= $this->include('admin/navbar'); ?>
 
 <?php
 
