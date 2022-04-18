@@ -14,7 +14,7 @@ class VisitorModel extends Model
     protected $returnType       = 'object';
     protected $useSoftDeletes   = true;
     protected $protectFields    = true;
-    protected $allowedFields    = ['name', 'classroom', 'visited'];
+    protected $allowedFields    = ['name', 'classroom', 'visited', 'session'];
 
     // Dates
     protected $useTimestamps = true;
