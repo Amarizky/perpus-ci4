@@ -26,7 +26,6 @@ use CodeIgniter\I18n\Time;
             </div>
         </div>
     <?php endif; ?>
-
     <div class="row mt-4">
         <div class="col">
             <?= $pager->links('default', 'bootstrap'); ?>
@@ -67,9 +66,15 @@ use CodeIgniter\I18n\Time;
                             <td class="align-middle"><?= $b->category; ?></td>
                             <td class="align-middle"><?= $b->author; ?></td>
                             <td class="align-middle text-center"><?= $b->year; ?></td>
-                            <td class="align-middle text-center"><?= str_replace('-', '<br>', $b->loaned_to ?? 'Tidak'); ?></td>
-                            <td class="align-middle text-center"><?= $b->loaned_at ? 'Jam ' . str_replace(' ', "<br>", Time::createFromTimestamp($b->loaned_at)->toLocalizedString('HH:m d-MM-Y')) : '-'; ?></td>
-                            <td class="align-middle text-center"><?= $b->returns_in ? Time::createFromTimestamp($b->returns_in)->toLocalizedString('d-MM-Y') : '-'; ?></td>
+                            <?php if ($b->loaned) : ?>
+                                <td class="align-middle text-center"><?= $b->loaned_to; ?></td>
+                                <td class="align-middle text-center"><?= 'Jam ' . str_replace(' ', "<br>", Time::createFromTimestamp($b->loaned_at)->toLocalizedString('HH:m d-MM-Y')); ?></td>
+                                <td class="align-middle text-center"><?= Time::createFromTimestamp($b->returns_in)->toLocalizedString('d-MM-Y'); ?></td>
+                            <?php else : ?>
+                                <td class="align-middle text-center">Tidak</td>
+                                <td class="align-middle text-center">-</td>
+                                <td class="align-middle text-center">-</td>
+                            <?php endif; ?>
                             <td class="align-middle text-center">
                                 <a href="#" data-book-id="<?= $b->id; ?>" data-bs-toggle="modal" data-bs-target="#book_edit" style="width: 58px;" class="btn btn-sm btn-success btn-edit">Edit</a>
                                 <a href="#" data-book-id="<?= $b->id; ?>" data-book-title="<?= $b->title; ?>" data-book-category="<?= $b->category; ?>" data-book-author="<?= $b->author; ?>" data-book-year="<?= $b->year; ?>" data-bs-toggle="modal" data-bs-target="#book_delete" style="width: 58px;" class="btn btn-sm btn-warning btn-delete">Hapus</a>

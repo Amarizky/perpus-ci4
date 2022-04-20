@@ -23,7 +23,7 @@ class Visitor extends BaseController
         $visitorModel  = new VisitorModel();
 
         $page          = $this->request->getGet('page') ?? 1;
-        $bookList      = $bookModel->getAllBooks()->orderBy('books.title');
+        $bookList      = $bookModel->getAllBooks()->orderBy('b.title');
 
         $data = [
             'pageTitle'   => 'Pinjam Buku',

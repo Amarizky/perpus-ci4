@@ -66,26 +66,27 @@ class BookModel extends Model
     function getAllBooks()
     {
         return $this
-            ->select('books.id, books.title, c.name category, books.author, books.year, CONCAT(v.classroom, "-", v.name) loaned_to, l.created_at loaned_at, l.created_at + (7*86400) returns_in')
-            ->from('books', true)
-            ->join('loans l', 'books.id=l.book_id', 'left')
+            ->select('b.id, b.title, c.name category, b.author, b.year, (l.created_at IS NOT NULL) loaned, CONCAT(v.name, " (", v.classroom, ")") loaned_to, l.created_at loaned_at, l.created_at + (7*86400) returns_in')
+            ->from('books b')
+            ->join('(SELECT * FROM loans WHERE deleted_at IS NULL) l', 'b.id=l.book_id', 'left')
             ->join('visitors v', 'l.loaned_to=v.id', 'left')
-            ->join('categories c', 'books.category_id=c.id', 'left')
-            ->where('books.deleted_at', null);
+            ->join('categories c', 'b.category_id=c.id')
+            ->groupBy('b.id', 'DESC');
     }
 
     function getBorrowedBooks()
     {
         $visitorModel = new VisitorModel();
-        $visitor = $visitorModel->getVisitor()->getRow();
+        $visitor      = $visitorModel->getVisitor()->getRow();
 
         return $this
-            ->select('books.id, books.title, c.name category, books.author, books.year, CONCAT(v.classroom, "-", v.name) loaned_to, l.created_at loaned_at, l.created_at + (7*86400) returns_in')
-            ->from('books', true)
-            ->join('loans l', 'books.id=l.book_id', 'left')
+            ->select('b.id, b.title, c.name category, b.author, b.year, CONCAT(v.name, " (", v.classroom, ")") loaned_to, l.created_at loaned_at, l.created_at + (7*86400) returns_in')
+            ->from('loans l')
+            ->join('books b', 'l.book_id=b.id', 'left')
             ->join('visitors v', 'l.loaned_to=v.id', 'left')
-            ->join('categories c', 'books.category_id=c.id', 'left')
+            ->join('categories c', 'b.category_id=c.id', 'left')
             ->where('l.loaned_to', $visitor->id)
-            ->where('l.deleted_at', null);
+            ->where('l.deleted_at', null)
+            ->groupBy('l.id', 'DESC');
     }
 }
