@@ -87,6 +87,23 @@ class BookModel extends Model
             ->join('categories c', 'b.category_id=c.id', 'left')
             ->where('l.loaned_to', $visitor->id)
             ->where('l.deleted_at', null)
-            ->groupBy('l.id', 'DESC');
+            ->groupBy('l.id', 'DESC')
+            ->orderBy('l.created_at', 'DESC');
+    }
+
+    function getRecentlyBorrowedBooks()
+    {
+        $visitorModel = new VisitorModel();
+        $visitor      = $visitorModel->getVisitor();
+
+        return $this
+            ->select('b.id, b.title, c.name category, b.author, b.year, MAX(l.created_at) loaned_at, MAX(l.deleted_at) returns_at')
+            ->from('loans l')
+            ->join('books b', 'l.book_id=b.id')
+            ->join('categories c', 'b.category_id=c.id')
+            ->where('l.loaned_to', $visitor->id)
+            ->where('l.deleted_at IS NOT NULL')
+            ->groupBy('b.id')
+            ->orderBy('l.created_at', 'DESC');
     }
 }

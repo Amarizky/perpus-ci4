@@ -12,8 +12,22 @@ class Visitor extends BaseController
 {
     public function index()
     {
-        // TODO: Dashboard with 2 tables
-        return redirect()->to('visitor/borrow');
+        $bookModel     = new BookModel();
+        $categoryModel = new CategoryModel();
+        $visitorModel  = new VisitorModel();
+
+        $page          = $this->request->getGet('page') ?? 1;
+
+        $data = [
+            'pageTitle'        => 'Statistik Pengguna',
+            'borrowedBookList' => $bookModel->getBorrowedBooks()->limit(5)->find(),
+            'recentBookList'   => $bookModel->getRecentlyBorrowedBooks()->limit(5)->find(),
+            'page'             => $page,
+            'categories'       => $categoryModel->findAll(),
+            'visitor'          => $visitorModel->getVisitor(),
+        ];
+
+        return view('visitor/dashboard', $data);
     }
 
     public function borrow()
