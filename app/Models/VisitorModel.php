@@ -69,7 +69,7 @@ class VisitorModel extends Model
 
     function getVisitor()
     {
-        return $this->where('session', session()->get('session'))->get();
+        return $this->where('session', session()->get('session'))->find()[0];
     }
 
     function check(): bool

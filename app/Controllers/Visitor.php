@@ -31,7 +31,7 @@ class Visitor extends BaseController
             'pager'       => $bookList->pager,
             'page'        => $page,
             'categories'  => $categoryModel->findAll(),
-            'visitor'     => $visitorModel->getVisitor()->getRow(),
+            'visitor'     => $visitorModel->getVisitor(),
         ];
 
         return view('visitor/borrow', $data);
@@ -61,7 +61,7 @@ class Visitor extends BaseController
             'bookList'    => $bookList->get()->getResult(),
             'page'        => $page,
             'categories'  => $categoryModel->findAll(),
-            'visitor'     => $visitorModel->getVisitor()->getRow(),
+            'visitor'     => $visitorModel->getVisitor(),
         ];
 
         return view('visitor/return', $data);
