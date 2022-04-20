@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Models\VisitorModel;
 
 class Login extends BaseController
 {
@@ -14,8 +15,12 @@ class Login extends BaseController
     }
     public function index()
     {
+        $visitorModel = new VisitorModel();
+
         $data = [
-            'pageTitle' => 'Perpustakaan',
+            'pageTitle'  => 'Perpustakaan',
+            'names'      => $visitorModel->getAllNames(),
+            'classrooms' => $visitorModel->getAllClassrooms(),
         ];
 
         return view('login', $data);

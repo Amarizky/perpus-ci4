@@ -25,12 +25,25 @@
                             <?= csrf_field(); ?>
                             <div class="mb-3">
                                 <label for="name" class="form-label">Nama</label>
-                                <input type="text" class="form-control" name="name" placeholder="Masukkan namamu">
-                                <!-- Todo: <datalist> -->
+                                <input type="text" class="form-control" list="names" name="name" placeholder="Masukkan namamu">
+                                <?php if ($names) : ?>
+                                    <datalist id="names">
+                                        <?php foreach ($names as $n) : ?>
+                                            <option value="<?= $n->name; ?>"><?= $n->name; ?></option>
+                                        <?php endforeach; ?>
+                                    </datalist>
+                                <?php endif; ?>
                             </div>
                             <div class="mb-3">
                                 <label for="classroom" class="form-label">Kelas</label>
-                                <input type="text" class="form-control" name="classroom" placeholder="Masukkan kelasmu">
+                                <input type="text" class="form-control" list="classrooms" name="classroom" placeholder="Masukkan kelasmu">
+                                <?php if ($classrooms) : ?>
+                                    <datalist id="classrooms">
+                                        <?php foreach ($classrooms as $c) : ?>
+                                            <option value="<?= $c->classroom; ?>"><?= $c->classroom; ?></option>
+                                        <?php endforeach; ?>
+                                    </datalist>
+                                <?php endif; ?>
                             </div>
                             <div class="w-100 text-end">
                                 <button type="submit" class="btn btn-primary">Masuk</button>

@@ -67,6 +67,16 @@ class VisitorModel extends Model
         session()->set('admin', false);
     }
 
+    function getAllNames()
+    {
+        return $this->groupBy('name')->findAll();
+    }
+
+    function getAllClassrooms()
+    {
+        return $this->groupBy('classroom')->findAll();
+    }
+
     function getVisitor()
     {
         return $this->where('session', session()->get('session'))->find()[0];
