@@ -22,7 +22,7 @@
             </div>
         </div>
     <?php endif; ?>
-    <div class="row mt-4">
+    <div class="row mt-4 justify-content-end">
         <div class="col-lg-4 col-md-6 col-sm-8">
             <table class="table">
                 <thead>
