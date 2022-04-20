@@ -8,7 +8,13 @@
     <title><?= $pageTitle; ?></title>
     <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="/assets/css/bootstrap-icons/bootstrap-icons.css">
-    <script defer src="/assets/js/bootstrap.bundle.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+    </style>
+    <script defer src="/assets/js/bootstrap.bundle.min.js"></script>
     <script src="/assets/js/jquery-3.6.0.min.js"></script>
 </head>
 
