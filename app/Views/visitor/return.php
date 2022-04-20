@@ -3,11 +3,7 @@
 
 <?= $this->include('visitor/navbar'); ?>
 
-<?php
-
-use CodeIgniter\I18n\Time;
-
-?>
+<?php helper('date'); ?>
 
 <div class="container-fluid">
     <?php if ($toast = session()->getFlashdata('toast')) : ?>
@@ -73,15 +69,15 @@ use CodeIgniter\I18n\Time;
                         </tr>
                     <?php endif; ?>
                     <?php foreach ($bookList as $b) : ?>
-                        <tr style="height: 66px;">
+                        <tr style="height: 66px;" class="<?= now() > $b->returns_in ? 'bg-warning' : ''; ?>">
                             <td class="align-middle text-center"><?= $i++; ?></td>
                             <td class="align-middle"><?= $b->title; ?></td>
                             <td class="align-middle"><?= $b->category; ?></td>
                             <td class="align-middle"><?= $b->author; ?></td>
                             <td class="align-middle text-center"><?= $b->year; ?></td>
                             <td class="align-middle text-center"><?= $b->loaned_to ? 'Sedang dipinjam' : 'Tidak'; ?></td>
-                            <td class="align-middle text-center"><?= $b->loaned_at ? 'Jam ' . str_replace(' ', "<br>", Time::createFromTimestamp($b->loaned_at)->toLocalizedString('HH:m d-MM-Y')) : '-'; ?></td>
-                            <td class="align-middle text-center"><?= $b->returns_in ? Time::createFromTimestamp($b->returns_in)->toLocalizedString('d-MM-Y') : '-'; ?></td>
+                            <td class="align-middle text-center"><?= $b->loaned_at ? 'Jam ' . str_replace(' ', "<br>", unixToHumanFull($b->loaned_at)) : '-'; ?></td>
+                            <td class="align-middle text-center"><?= $b->returns_in ? unixToHumanDate($b->returns_in) : '-'; ?></td>
                             <td class="align-middle text-center">
                                 <a href="#" data-book-id="<?= $b->id; ?>" data-book-title="<?= $b->title; ?>" data-book-category="<?= $b->category; ?>" data-book-author="<?= $b->author; ?>" data-book-year="<?= $b->year; ?>" data-bs-toggle="modal" data-bs-target="#book_return" class="btn btn-sm btn-success w-100 btn-return">Kembalikan</a>
                             </td>

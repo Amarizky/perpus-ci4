@@ -3,11 +3,7 @@
 
 <?= $this->include('visitor/navbar'); ?>
 
-<?php
-
-use CodeIgniter\I18n\Time;
-
-?>
+<?php helper('date'); ?>
 
 <div class="container-fluid">
     <?php if ($toast = session()->getFlashdata('toast')) : ?>
@@ -86,8 +82,8 @@ use CodeIgniter\I18n\Time;
                             <td class="align-middle text-center"><?= $b->year; ?></td>
                             <?php if ($b->loaned) : ?>
                                 <td class="align-middle text-center"><?= 'Sedang dipinjam'; ?></td>
-                                <td class="align-middle text-center"><?= 'Jam ' . str_replace(' ', "<br>", Time::createFromTimestamp($b->loaned_at)->toLocalizedString('HH:m d-MM-Y')); ?></td>
-                                <td class="align-middle text-center"><?= Time::createFromTimestamp($b->returns_in)->toLocalizedString('d-MM-Y'); ?></td>
+                                <td class="align-middle text-center"><?= 'Jam ' . str_replace(' ', "<br>", unixToHumanFull($b->loaned_at)); ?></td>
+                                <td class="align-middle text-center"><?= unixToHumanDate($b->returns_in); ?></td>
                             <?php else : ?>
                                 <td class="align-middle text-center">Tidak</td>
                                 <td class="align-middle text-center">-</td>
