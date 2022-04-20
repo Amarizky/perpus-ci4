@@ -45,14 +45,14 @@ class Admin extends BaseController
         if (!$bookModel->insert($data)) {
             session()->setFlashdata('errorFor', 'add');
             session()->setFlashdata('errors', $bookModel->errors());
-            return redirect()->to('/admin/books#book_add')->withInput();
+            return redirect()->to('/admin#book_add')->withInput();
         }
 
         session()->setFlashdata('toast', [
             'title' => 'Buku',
             'message' => "Buku berjudul \"{$title}\" berhasil ditambahkan",
         ]);
-        return redirect()->to('/admin/books');
+        return redirect()->to('/admin');
     }
 
     public function book_edit()
@@ -74,14 +74,14 @@ class Admin extends BaseController
         if (!$bookModel->update($id, $data)) {
             session()->setFlashdata('errorFor', 'edit');
             session()->setFlashdata('errors', $bookModel->errors());
-            return redirect()->to('/admin/books#book_edit')->withInput();
+            return redirect()->to('/admin#book_edit')->withInput();
         }
 
         session()->setFlashdata('toast', [
             'title' => 'Buku',
             'message' => "Buku berjudul \"{$title}\" berhasil diedit",
         ]);
-        return redirect()->to('/admin/books');
+        return redirect()->to('/admin');
     }
 
     public function book_delete()
@@ -95,7 +95,7 @@ class Admin extends BaseController
             'title' => 'Buku',
             'message' => "Buku berjudul \"{$book->title}\" berhasil dihapus",
         ]);
-        return redirect()->to('/admin/books');
+        return redirect()->to('/admin');
     }
 
     public function get_book_data()

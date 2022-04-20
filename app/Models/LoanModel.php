@@ -44,7 +44,7 @@ class LoanModel extends Model
     function borrow($book_id = 0)
     {
         $visitorModel = new VisitorModel();
-        $visitor = $visitorModel->getVisitor()->getRow();
+        $visitor = $visitorModel->getVisitor();
 
         $this->insert([
             'loaned_to' => $visitor->id,
@@ -55,7 +55,7 @@ class LoanModel extends Model
     function return($book_id = 0)
     {
         $visitorModel = new VisitorModel();
-        $visitor = $visitorModel->getVisitor()->getRow();
+        $visitor = $visitorModel->getVisitor();
 
         $this->where([
             'loaned_to' => $visitor->id,

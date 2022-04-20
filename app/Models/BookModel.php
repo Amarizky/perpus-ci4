@@ -77,7 +77,7 @@ class BookModel extends Model
     function getBorrowedBooks()
     {
         $visitorModel = new VisitorModel();
-        $visitor      = $visitorModel->getVisitor()->getRow();
+        $visitor      = $visitorModel->getVisitor();
 
         return $this
             ->select('b.id, b.title, c.name category, b.author, b.year, CONCAT(v.name, " (", v.classroom, ")") loaned_to, l.created_at loaned_at, l.created_at + (7*86400) returns_in')

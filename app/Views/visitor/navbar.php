@@ -7,13 +7,13 @@
         <div class="collapse navbar-collapse" id="navbar-visitor">
             <ul class="navbar-nav my-2 my-lg-0">
                 <li class="nav-item">
-                    <a href="/visitor" class="nav-link <?= $seg[1] == 'dashboard' ? 'active' : ''; ?>"><i class="bi bi-person"></i> Pengguna</a>
+                    <a href="/visitor" class="nav-link <?= $seg[0] == 'visitor' && !isset($seg[1]) ? 'active' : ''; ?>"><i class="bi bi-person"></i> Pengguna</a>
                 </li>
                 <li class="nav-item">
-                    <a href="/visitor/borrow" class="nav-link <?= $seg[1] == 'borrow' ? 'active' : ''; ?>"><i class="bi bi-book"></i> Pinjam Buku</a>
+                    <a href="/visitor/borrow" class="nav-link <?= isset($seg[1]) && $seg[1] == 'borrow' ? 'active' : ''; ?>"><i class="bi bi-book"></i> Pinjam Buku</a>
                 </li>
                 <li class="nav-item">
-                    <a href="/visitor/return" class="nav-link <?= $seg[1] == 'return' ? 'active' : ''; ?>"><i class="bi bi-book-fill"></i> Kembalikan Buku</a>
+                    <a href="/visitor/return" class="nav-link <?= isset($seg[1]) && $seg[1] == 'return' ? 'active' : ''; ?>"><i class="bi bi-book-fill"></i> Kembalikan Buku</a>
                 </li>
             </ul>
             <ul class="navbar-nav ms-auto">
