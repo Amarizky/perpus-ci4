@@ -8,13 +8,13 @@
         <div class="collapse navbar-collapse" id="navbar-admin">
             <ul class="navbar-nav my-2 my-lg-0">
                 <li class="nav-item">
-                    <a href="/admin/books" class="nav-link <?= $seg[1] == 'books' ? 'active' : ''; ?>">Buku</a>
+                    <a href="/admin/books" class="nav-link <?= $seg[1] == 'books' ? 'active' : ''; ?>"><i class="bi bi-book"></i> Buku</a>
                 </li>
                 <li class="nav-item">
-                    <a href="/admin/categories" class="nav-link <?= $seg[1] == 'categories' ? 'active' : ''; ?>">Kategori</a>
+                    <a href="/admin/categories" class="nav-link <?= $seg[1] == 'categories' ? 'active' : ''; ?>"><i class="bi bi-tags"></i> Kategori</a>
                 </li>
                 <li class="nav-item">
-                    <a href="/admin/visitors" class="nav-link <?= $seg[1] == 'visitors' ? 'active' : ''; ?>">Pengunjung</a>
+                    <a href="/admin/visitors" class="nav-link <?= $seg[1] == 'visitors' ? 'active' : ''; ?>"><i class="bi bi-people"></i> Pengunjung</a>
                 </li>
             </ul>
             <ul class="navbar-nav ms-auto">
