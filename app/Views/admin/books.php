@@ -72,8 +72,8 @@
                                 <td class="align-middle text-center">-</td>
                             <?php endif; ?>
                             <td class="align-middle text-center">
-                                <a href="#" data-book-id="<?= $b->id; ?>" data-bs-toggle="modal" data-bs-target="#book_edit" style="width: 58px;" class="btn btn-sm btn-success btn-edit"><i class="bi bi-pencil-square"></i></a>
-                                <a href="#" data-book-id="<?= $b->id; ?>" data-book-title="<?= $b->title; ?>" data-book-category="<?= $b->category; ?>" data-book-author="<?= $b->author; ?>" data-book-year="<?= $b->year; ?>" data-bs-toggle="modal" data-bs-target="#book_delete" style="width: 58px;" class="btn btn-sm btn-danger btn-delete"><i class="bi bi-trash"></i></a>
+                                <a href="#" data-book-id="<?= $b->id; ?>" title="Edit buku" data-bs-toggle="modal" data-bs-target="#book_edit" style="width: 58px;" class="btn btn-sm btn-success btn-edit"><i class="bi bi-pencil-square"></i></a>
+                                <a href="#" data-book-id="<?= $b->id; ?>" title="Hapus buku" data-book-title="<?= $b->title; ?>" data-book-category="<?= $b->category; ?>" data-book-author="<?= $b->author; ?>" data-book-year="<?= $b->year; ?>" data-bs-toggle="modal" data-bs-target="#book_delete" style="width: 58px;" class="btn btn-sm btn-danger btn-delete"><i class="bi bi-trash"></i></a>
                             </td>
                         </tr>
                     <?php endforeach; ?>

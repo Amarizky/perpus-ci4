@@ -77,7 +77,7 @@
                             <td class="align-middle text-center"><?= $b->loaned_at ? 'Jam ' . str_replace(' ', "<br>", unixToHumanFull($b->loaned_at)) : '-'; ?></td>
                             <td class="align-middle text-center"><?= $b->returns_in ? unixToHumanDate($b->returns_in) : '-'; ?></td>
                             <td class="align-middle text-center">
-                                <a href="#" data-book-id="<?= $b->id; ?>" data-book-title="<?= $b->title; ?>" data-book-category="<?= $b->category; ?>" data-book-author="<?= $b->author; ?>" data-book-year="<?= $b->year; ?>" data-bs-toggle="modal" data-bs-target="#book_return" class="btn btn-sm btn-success w-100 btn-return">Kembalikan</a>
+                                <a href="#" data-book-id="<?= $b->id; ?>" data-book-title="<?= $b->title; ?>" data-book-category="<?= $b->category; ?>" data-book-author="<?= $b->author; ?>" data-book-year="<?= $b->year; ?>" data-bs-toggle="modal" data-bs-target="#book_return" class="btn btn-sm btn-success w-100 btn-return"><i class="bi bi-journal-minus"></i> Kembalikan</a>
                             </td>
                         </tr>
                     <?php endforeach; ?>
