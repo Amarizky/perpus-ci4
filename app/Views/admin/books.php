@@ -111,7 +111,7 @@
                 <div class="mb-3">
                     <label for="add_category_id" class="form-label">Kategori</label>
                     <select class="form-select <?= $error && isset($errors['category_id']) ? 'is-invalid' : ''; ?>" id="add_category_id" name="category_id">
-                        <option value="" selected>Pilih salah satu</option>
+                        <option value="" disabled selected>Pilih salah satu</option>
                         <?php foreach ($categories as $category) : ?>
                             <option value="<?= $category->id; ?>" <?= old('category_id') == $category->id ? 'selected' : ''; ?>><?= $category->name; ?></option>
                         <?php endforeach; ?>
@@ -173,7 +173,7 @@
                 <div class="mb-3">
                     <label for="edit_category_id" class="form-label">Kategori</label>
                     <select class="form-select <?= $error && isset($errors['category_id']) ? 'is-invalid' : ''; ?>" id="edit_category_id" name="category_id">
-                        <option value="" selected>Pilih salah satu</option>
+                        <option value="" disabled selected>Pilih salah satu</option>
                         <?php foreach ($categories as $category) : ?>
                             <option value="<?= $category->id; ?>" <?= old('category_id') == $category->id ? 'selected' : ''; ?>><?= $category->name; ?></option>
                         <?php endforeach; ?>
@@ -276,7 +276,6 @@
 
                 $('#edit_book_id').val(data.id);
                 $('#edit_title').val(data.title);
-                console.log(data.category_id);
                 data.category_id ? $('#edit_category_id').val(data.category_id).change() : $('#edit_category_id').prop('selectedIndex', 0);
                 $('#edit_author').val(data.author);
                 $('#edit_year').val(data.year);
