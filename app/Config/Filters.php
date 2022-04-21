@@ -2,6 +2,8 @@
 
 namespace Config;
 
+use App\Filters\AdminAuth;
+use App\Filters\VisitorAuth;
 use CodeIgniter\Config\BaseConfig;
 use CodeIgniter\Filters\CSRF;
 use CodeIgniter\Filters\DebugToolbar;
@@ -23,6 +25,8 @@ class Filters extends BaseConfig
         'honeypot'      => Honeypot::class,
         'invalidchars'  => InvalidChars::class,
         'secureheaders' => SecureHeaders::class,
+        'admin-auth'    => AdminAuth::class,
+        'visitor-auth'  => VisitorAuth::class,
     ];
 
     /**

@@ -42,23 +42,23 @@ class VisitorModel extends Model
 
     function visit($name, $classroom)
     {
+        helper('text');
+        $sessionToken = random_string('alnum', 64);
+
         $visitor = $this->where('name', $name)
             ->where('classroom', $classroom)
-            ->find()[0];
+            ->find()[0] ?? false;
 
         if (!$visitor) {
             $this->insert([
-                'name' => $name,
+                'name'      => $name,
                 'classroom' => $classroom,
-                'visited' => 0
+                'visited'   => 0,
+                'session'   => $sessionToken,
             ]);
-            $visitor = $this->where('name', $name)
-                ->where('classroom', $classroom)
-                ->find()[0];
+            $visitor = $this->find($this->insertID);
         }
 
-        helper('text');
-        $sessionToken = random_string('alnum', 64);
         $this->update($visitor->id, [
             'session' => $sessionToken,
             'visited' => $visitor->visited + 1
@@ -79,7 +79,7 @@ class VisitorModel extends Model
 
     function getVisitor()
     {
-        return $this->where('session', session()->get('session'))->find()[0];
+        return $this->where('session', session()->get('session'))->find()[0] ?? null;
     }
 
     function check(): bool

@@ -64,7 +64,7 @@
                     <?php $i = (($page - 1) * 20) + 1; ?>
                     <?php if (!$bookList) : ?>
                         <tr>
-                            <td class="text-center" colspan="9">Tidak ada buku yang dipinjam</td>
+                            <td class="text-center" colspan="9">Belum ada buku yang dipinjam</td>
                         </tr>
                     <?php endif; ?>
                     <?php foreach ($bookList as $b) : ?>

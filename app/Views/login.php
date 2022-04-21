@@ -23,7 +23,7 @@
                 </div>
                 <div class="card-body carousel-inner">
                     <div class="carousel-item <?= $alert ? '' : 'active'; ?>">
-                        <form method="post" action="<?= base_url('Login/login_visitor'); ?>">
+                        <form method="post" action="<?= base_url('login/visitor'); ?>">
                             <?= csrf_field(); ?>
                             <div class="mb-3">
                                 <label for="name" class="form-label">Nama</label>
@@ -68,7 +68,7 @@
                                 <?= $alert['message']; ?>
                             </div>
                         <?php endif; ?>
-                        <form method="post" action="<?= base_url('Login/login_admin'); ?>">
+                        <form method="post" action="<?= base_url('login/admin'); ?>">
                             <?= csrf_field(); ?>
                             <div class="mb-3">
                                 <label for="username" class="form-label">Nama pengguna</label>

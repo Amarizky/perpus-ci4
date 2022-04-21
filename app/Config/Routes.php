@@ -32,12 +32,16 @@ $routes->setAutoRoute(true);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->add('/', 'Login::index');
-$routes->group('/admin', ['filter' => 'AdminAuth'], function ($routes) {
+$routes->group('/login', function ($routes) {
+    $routes->add('admin', 'Login::login_admin');
+    $routes->add('visitor', 'Login::login_visitor');
+});
+$routes->group('/admin', ['filter' => 'admin-auth'], function ($routes) {
     $routes->add('/',          'Admin/Books::index');
     $routes->add('categories', 'Admin/Categories::index');
     $routes->add('visitors',   'Admin/Visitors::index');
 });
-$routes->group('/visitor', ['filters' => 'VisitorAuth'], function ($routes) {
+$routes->group('/visitor', ['filter' => 'visitor-auth'], function ($routes) {
     $routes->add('/',          'Visitor/Dashboard::index');
     $routes->add('borrow',     'Visitor/BorrowBook::index');
     $routes->add('return',     'Visitor/ReturnBook::index');

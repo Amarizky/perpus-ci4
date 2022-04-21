@@ -2,8 +2,9 @@
 
 namespace App\Controllers;
 
-use App\Controllers\BaseController;
+use App\Models\AdminModel;
 use App\Models\VisitorModel;
+use App\Controllers\BaseController;
 
 class Login extends BaseController
 {
@@ -15,7 +16,11 @@ class Login extends BaseController
     }
     public function index()
     {
+        $adminModel   = new AdminModel();
         $visitorModel = new VisitorModel();
+
+        if ($adminModel->check())   return redirect()->to('/admin');
+        if ($visitorModel->check()) return redirect()->to('/visitor');
 
         $data = [
             'pageTitle'  => 'Perpustakaan',
