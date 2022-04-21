@@ -2,6 +2,8 @@
 <?= $this->section('content'); ?>
 
 <?php $alert = session()->getFlashdata('alert'); ?>
+<?php $error = session()->getFlashdata('errorFor') == 'login'; ?>
+<?php $errors = session()->getFlashdata('errors'); ?>
 
 <div class="container-fluid h-100">
     <div class="row align-items-center h-100">
@@ -25,7 +27,12 @@
                             <?= csrf_field(); ?>
                             <div class="mb-3">
                                 <label for="name" class="form-label">Nama</label>
-                                <input type="text" class="form-control" list="names" name="name" placeholder="Masukkan namamu">
+                                <input type="text" class="form-control <?= $error && isset($errors['name']) ? 'is-invalid' : ''; ?>" list="names" name="name" placeholder="Masukkan namamu" value="<?= old('name'); ?>">
+                                <?php if ($error && isset($errors['name'])) : ?>
+                                    <div class="text-danger">
+                                        <?= $errors['name']; ?>
+                                    </div>
+                                <?php endif; ?>
                                 <?php if ($names) : ?>
                                     <datalist id="names">
                                         <?php foreach ($names as $n) : ?>
@@ -36,7 +43,12 @@
                             </div>
                             <div class="mb-3">
                                 <label for="classroom" class="form-label">Kelas</label>
-                                <input type="text" class="form-control" list="classrooms" name="classroom" placeholder="Masukkan kelasmu">
+                                <input type="text" class="form-control <?= $error && isset($errors['classroom']) ? 'is-invalid' : ''; ?>" list="classrooms" name="classroom" placeholder="Masukkan kelasmu" value="<?= old('classroom'); ?>">
+                                <?php if ($error && isset($errors['classroom'])) : ?>
+                                    <div class="text-danger">
+                                        <?= $errors['classroom']; ?>
+                                    </div>
+                                <?php endif; ?>
                                 <?php if ($classrooms) : ?>
                                     <datalist id="classrooms">
                                         <?php foreach ($classrooms as $c) : ?>

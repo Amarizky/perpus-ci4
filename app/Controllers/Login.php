@@ -28,6 +28,22 @@ class Login extends BaseController
 
     public function login_visitor()
     {
+        if (!$this->validate([
+            'name'         => 'required',
+            'classroom'    => 'required',
+        ], [
+            'name'         => [
+                'required' => 'Nama harus diisi'
+            ],
+            'classroom'    => [
+                'required' => 'Kelas harus diisi'
+            ],
+        ])) {
+            session()->setFlashdata('errorFor', 'login');
+            session()->setFlashdata('errors', $this->validator->getErrors());
+            return redirect()->to('/login')->withInput();
+        }
+
         $name      = ucwords($this->request->getPost('name'));
         $classroom = strtoupper($this->request->getPost('classroom'));
 
