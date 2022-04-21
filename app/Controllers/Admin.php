@@ -104,7 +104,7 @@ class Admin extends BaseController
 
         $bookModel = new BookModel();
         $id        = $this->request->getPost('book_id');
-        $res       = $bookModel->find($id);
+        $res       = $bookModel->getBook($id);
         $res->csrf = csrf_hash();
 
         return json_encode($res);

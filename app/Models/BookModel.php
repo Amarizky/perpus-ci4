@@ -63,6 +63,16 @@ class BookModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
+    function getBook($id = 0)
+    {
+        $categoryModel = new CategoryModel();
+        $book = $this->find($id);
+
+        if (!$categoryModel->find($book->category_id)) $book->category_id = null;
+
+        return $book;
+    }
+
     function getAllBooks()
     {
         return $this

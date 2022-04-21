@@ -111,7 +111,7 @@
                 <div class="mb-3">
                     <label for="add_category_id" class="form-label">Kategori</label>
                     <select class="form-select <?= $error && isset($errors['category_id']) ? 'is-invalid' : ''; ?>" id="add_category_id" name="category_id">
-                        <option value="null" disabled selected>Pilih salah satu</option>
+                        <option value="" selected>Pilih salah satu</option>
                         <?php foreach ($categories as $category) : ?>
                             <option value="<?= $category->id; ?>" <?= old('category_id') == $category->id ? 'selected' : ''; ?>><?= $category->name; ?></option>
                         <?php endforeach; ?>
@@ -142,8 +142,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" style="width: 70px;" data-bs-dismiss="modal">Tutup</button>
-                <button type="submit" class="btn btn-primary" style="width: 70px;">Tambah</button>
+                <button type="button" class="btn btn-secondary" style="width: 90px;" data-bs-dismiss="modal">Tutup</button>
+                <button type="submit" class="btn btn-primary" style="width: 90px;">Tambah</button>
             </div>
         </div>
     </div>
@@ -173,7 +173,7 @@
                 <div class="mb-3">
                     <label for="edit_category_id" class="form-label">Kategori</label>
                     <select class="form-select <?= $error && isset($errors['category_id']) ? 'is-invalid' : ''; ?>" id="edit_category_id" name="category_id">
-                        <option value="null" disabled selected>Pilih salah satu</option>
+                        <option value="" selected>Pilih salah satu</option>
                         <?php foreach ($categories as $category) : ?>
                             <option value="<?= $category->id; ?>" <?= old('category_id') == $category->id ? 'selected' : ''; ?>><?= $category->name; ?></option>
                         <?php endforeach; ?>
@@ -204,8 +204,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button id="btn_edit_close_2" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                <button type="submit" class="btn btn-primary">Simpan</button>
+                <button id="btn_edit_close_2" type="button" class="btn btn-secondary" style="width: 90px;" data-bs-dismiss="modal">Tutup</button>
+                <button type="submit" class="btn btn-primary" style="width: 90px;">Simpan</button>
             </div>
         </div>
     </div>
@@ -247,8 +247,8 @@
                 <p>Apakah Anda yakin ingin menghapus buku tersebut dari database?</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" style="width: 70px;" data-bs-dismiss="modal">Tidak</button>
-                <button type="submit" class="btn btn-danger" style="width: 70px;">Ya</button>
+                <button type="button" class="btn btn-secondary" style="width: 90px;" data-bs-dismiss="modal">Tidak</button>
+                <button type="submit" class="btn btn-danger" style="width: 90px;">Ya</button>
             </div>
         </div>
     </div>
@@ -276,7 +276,8 @@
 
                 $('#edit_book_id').val(data.id);
                 $('#edit_title').val(data.title);
-                $('#edit_category_id').val(data.category_id).change();
+                console.log(data.category_id);
+                data.category_id ? $('#edit_category_id').val(data.category_id).change() : $('#edit_category_id').prop('selectedIndex', 0);
                 $('#edit_author').val(data.author);
                 $('#edit_year').val(data.year);
             },
