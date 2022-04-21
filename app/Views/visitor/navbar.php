@@ -18,7 +18,7 @@
             </ul>
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a href="/logout" class="nav-link">Keluar</a>
+                    <a href="/logout" class="nav-link"><i class="bi bi-box-arrow-right"></i> Keluar</a>
                 </li>
             </ul>
         </div>

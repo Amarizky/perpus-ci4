@@ -90,7 +90,7 @@
                                 <td class="align-middle text-center">-</td>
                             <?php endif; ?>
                             <td class="align-middle text-center">
-                                <a href="#" data-book-id="<?= $b->id; ?>" data-book-title="<?= $b->title; ?>" data-book-category="<?= $b->category; ?>" data-book-author="<?= $b->author; ?>" data-book-year="<?= $b->year; ?>" data-bs-toggle="modal" data-bs-target="#book_borrow" class="btn btn-sm btn-success w-100 btn-borrow <?= $b->loaned ? 'disabled' : ''; ?>">Pinjam</a>
+                                <a href="#" data-book-id="<?= $b->id; ?>" data-book-title="<?= $b->title; ?>" data-book-category="<?= $b->category; ?>" data-book-author="<?= $b->author; ?>" data-book-year="<?= $b->year; ?>" data-bs-toggle="modal" data-bs-target="#book_borrow" class="btn btn-sm btn-success w-100 btn-borrow <?= $b->loaned ? 'disabled' : ''; ?>"><i class="bi bi-journal-plus"></i> Pinjam</a>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -105,7 +105,7 @@
     </div>
 </div>
 
-<form id="book_borrow" action="<?= base_url('visitor/book_borrow'); ?>" method="post" class="modal" tabindex="-1">
+<form id="book_borrow" action="<?= base_url('visitor/borrowbook/borrow'); ?>" method="post" class="modal" tabindex="-1">
     <input type="hidden" name="<?= csrf_token(); ?>" id="borrow_csrf" value="<?= csrf_hash(); ?>">
     <input type="hidden" name="book_id" id="borrow_book_id">
     <div class="modal-dialog">

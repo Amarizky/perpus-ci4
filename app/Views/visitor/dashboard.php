@@ -29,16 +29,12 @@
             </table>
         </div>
     </div>
-    <div class="row mb-4">
+    <div class="row my-4">
         <div class="col">
-            <div class="row mb-2">
-                <div class="col">
-                    <h4>Buku yang sedang dipinjam</h4>
-                </div>
-                <div class="col text-end">
-                    <a href="<?= base_url('/visitor/return'); ?>" style="width: 170px;" class="btn btn-success"><i class="bi bi-book-fill"></i> Kembalikan Buku</a>
-                </div>
+            <div class="my-2 float-end">
+                <a href="<?= base_url('/visitor/return'); ?>" style="width: 170px;" class="btn btn-success"><i class="bi bi-book-fill"></i> Kembalikan Buku</a>
             </div>
+            <h4>Buku yang sedang dipinjam</h4>
             <table class="table table-striped table-bordered">
                 <thead>
                     <tr>
@@ -75,14 +71,10 @@
     </div>
     <div class="row">
         <div class="col">
-            <div class="row mb-2">
-                <div class="col">
-                    <h4>Buku yang pernah dipinjam</h4>
-                </div>
-                <div class="col text-end">
-                    <a href="<?= base_url('/visitor/borrow'); ?>" style="width: 170px;" class="btn btn-primary"><i class="bi bi-book"></i> Pinjam Buku</a>
-                </div>
+            <div class="my-2 float-end">
+                <a href="<?= base_url('/visitor/borrow'); ?>" style="width: 170px;" class="btn btn-primary"><i class="bi bi-book"></i> Pinjam Buku</a>
             </div>
+            <h4>Buku yang pernah dipinjam</h4>
             <table class="table table-striped table-bordered">
                 <thead>
                     <tr>

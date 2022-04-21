@@ -51,14 +51,13 @@
                 <thead>
                     <tr>
                         <th scope="col" style="width: 4%;" class="text-center">#</th>
-                        <th scope="col" style="width: 28%;">Judul Buku</th>
-                        <th scope="col" style="width: 9%;">Kategori</th>
-                        <th scope="col" style="width: 12%;">Penulis</th>
-                        <th scope="col" style="width: 5%;" class="text-center">Tahun Terbit</th>
-                        <th scope="col" style="width: 14%;" class="text-center">Dipinjam?</th>
-                        <th scope="col" style="width: 8%;" class="text-center">Tanggal Pinjam</th>
-                        <th scope="col" style="width: 8%;" class="text-center">Tanggal Kembali</th>
-                        <th scope="col" style="width: 12%;" class="text-center">Aksi</th>
+                        <th scope="col" style="width: 30%;">Judul Buku</th>
+                        <th scope="col" style="width: 10%;">Kategori</th>
+                        <th scope="col" style="width: 14%;">Penulis</th>
+                        <th scope="col" style="width: 8%;" class="text-center">Tahun Terbit</th>
+                        <th scope="col" style="width: 10%;" class="text-center">Tanggal Pinjam</th>
+                        <th scope="col" style="width: 10%;" class="text-center">Tanggal Kembali</th>
+                        <th scope="col" style="width: 14%;" class="text-center">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -75,7 +74,6 @@
                             <td class="align-middle"><?= $b->category; ?></td>
                             <td class="align-middle"><?= $b->author; ?></td>
                             <td class="align-middle text-center"><?= $b->year; ?></td>
-                            <td class="align-middle text-center"><?= $b->loaned_to ? 'Sedang dipinjam' : 'Tidak'; ?></td>
                             <td class="align-middle text-center"><?= $b->loaned_at ? 'Jam ' . str_replace(' ', "<br>", unixToHumanFull($b->loaned_at)) : '-'; ?></td>
                             <td class="align-middle text-center"><?= $b->returns_in ? unixToHumanDate($b->returns_in) : '-'; ?></td>
                             <td class="align-middle text-center">
@@ -89,7 +87,7 @@
     </div>
 </div>
 
-<form id="book_return" action="<?= base_url('visitor/book_return'); ?>" method="post" class="modal" tabindex="-1">
+<form id="book_return" action="<?= base_url('visitor/returnbook/return'); ?>" method="post" class="modal" tabindex="-1">
     <input type="hidden" name="<?= csrf_token(); ?>" id="return_csrf" value="<?= csrf_hash(); ?>">
     <input type="hidden" name="book_id" id="return_book_id">
     <div class="modal-dialog">

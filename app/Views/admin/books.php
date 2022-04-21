@@ -29,7 +29,7 @@
     </div>
     <div class="row mb-2">
         <div class="col text-end">
-            <button class="btn btn-primary" onclick="$('form').each((i, e) => e.reset())" data-bs-toggle="modal" data-bs-target="#book_add">Tambah Buku Baru</button>
+            <button class="btn btn-primary" onclick="$('form').each((i, e) => e.reset())" data-bs-toggle="modal" data-bs-target="#book_add"><i class="bi bi-plus-lg"></i> Tambah Buku Baru</button>
         </div>
     </div>
     <div class="row">
@@ -72,8 +72,8 @@
                                 <td class="align-middle text-center">-</td>
                             <?php endif; ?>
                             <td class="align-middle text-center">
-                                <a href="#" data-book-id="<?= $b->id; ?>" data-bs-toggle="modal" data-bs-target="#book_edit" style="width: 58px;" class="btn btn-sm btn-success btn-edit">Edit</a>
-                                <a href="#" data-book-id="<?= $b->id; ?>" data-book-title="<?= $b->title; ?>" data-book-category="<?= $b->category; ?>" data-book-author="<?= $b->author; ?>" data-book-year="<?= $b->year; ?>" data-bs-toggle="modal" data-bs-target="#book_delete" style="width: 58px;" class="btn btn-sm btn-warning btn-delete">Hapus</a>
+                                <a href="#" data-book-id="<?= $b->id; ?>" data-bs-toggle="modal" data-bs-target="#book_edit" style="width: 58px;" class="btn btn-sm btn-success btn-edit"><i class="bi bi-pencil-square"></i></a>
+                                <a href="#" data-book-id="<?= $b->id; ?>" data-book-title="<?= $b->title; ?>" data-book-category="<?= $b->category; ?>" data-book-author="<?= $b->author; ?>" data-book-year="<?= $b->year; ?>" data-bs-toggle="modal" data-bs-target="#book_delete" style="width: 58px;" class="btn btn-sm btn-danger btn-delete"><i class="bi bi-trash"></i></a>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -88,7 +88,7 @@
     </div>
 </div>
 
-<form id="book_add" action="<?= base_url('admin/book_add'); ?>" method="post" class="modal needs-validation" tabindex="-1" novalidate>
+<form id="book_add" action="<?= base_url('admin/books/add'); ?>" method="post" class="modal needs-validation" tabindex="-1" novalidate>
     <input type="hidden" name="<?= csrf_token(); ?>" id="add_csrf" value="<?= csrf_hash(); ?>">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -149,7 +149,7 @@
     </div>
 </form>
 
-<form id="book_edit" action="<?= base_url('admin/book_edit'); ?>" method="post" class="modal" data-bs-backdrop="static" tabindex="-1">
+<form id="book_edit" action="<?= base_url('admin/books/edit'); ?>" method="post" class="modal" data-bs-backdrop="static" tabindex="-1">
     <input type="hidden" name="<?= csrf_token(); ?>" id="edit_csrf" value="<?= csrf_hash(); ?>">
     <input type="hidden" name="book_id" id="edit_book_id" value="<?= old('book_id'); ?>">
     <div class="modal-dialog">
@@ -211,7 +211,7 @@
     </div>
 </form>
 
-<form id="book_delete" action="<?= base_url('admin/book_delete'); ?>" method="post" class="modal" tabindex="-1">
+<form id="book_delete" action="<?= base_url('admin/books/delete'); ?>" method="post" class="modal" tabindex="-1">
     <input type="hidden" name="<?= csrf_token(); ?>" id="delete_csrf" value="<?= csrf_hash(); ?>">
     <input type="hidden" name="book_id" id="delete_book_id">
     <div class="modal-dialog">
@@ -259,7 +259,7 @@
 
     $('.btn-edit').click(function() {
         $.ajax({
-            url: '<?= base_url('/admin/get_book_data'); ?>',
+            url: '<?= base_url('/admin/books/get_data'); ?>',
             headers: {
                 'X-Requested-With': 'XMLHttpRequest'
             },

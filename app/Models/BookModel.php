@@ -81,7 +81,8 @@ class BookModel extends Model
             ->join('(SELECT * FROM loans WHERE deleted_at IS NULL) l', 'b.id=l.book_id', 'left')
             ->join('visitors v', 'l.loaned_to=v.id', 'left')
             ->join('categories c', 'b.category_id=c.id')
-            ->groupBy('b.id', 'DESC');
+            ->groupBy('b.id', 'DESC')
+            ->where('b.deleted_at', null);
     }
 
     function getBorrowedBooks()
@@ -96,6 +97,7 @@ class BookModel extends Model
             ->join('visitors v', 'l.loaned_to=v.id', 'left')
             ->join('categories c', 'b.category_id=c.id', 'left')
             ->where('l.loaned_to', $visitor->id)
+            ->where('b.deleted_at', null)
             ->where('l.deleted_at', null)
             ->groupBy('l.id', 'DESC')
             ->orderBy('l.created_at', 'DESC');
@@ -112,6 +114,7 @@ class BookModel extends Model
             ->join('books b', 'l.book_id=b.id')
             ->join('categories c', 'b.category_id=c.id')
             ->where('l.loaned_to', $visitor->id)
+            ->where('b.deleted_at', null)
             ->where('l.deleted_at IS NOT NULL')
             ->groupBy('b.id')
             ->orderBy('l.created_at', 'DESC');

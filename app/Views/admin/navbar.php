@@ -1,5 +1,4 @@
 <?php $seg = current_url(true)->getSegments(); ?>
-<!-- TODO: Rename navbar-admin to admin/navbar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-admin" aria-controls="navbar-admin" aria-expanded="false" aria-label="Buka bilah navigasi">
@@ -19,7 +18,7 @@
             </ul>
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a href="/logout" class="nav-link">Keluar</a>
+                    <a href="/logout" class="nav-link"><i class="bi bi-box-arrow-right"></i> Keluar</a>
                 </li>
             </ul>
         </div>

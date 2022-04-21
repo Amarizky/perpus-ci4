@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Controllers\Admin;
 
-use App\Controllers\BaseController;
 use App\Models\BookModel;
 use App\Models\CategoryModel;
+use App\Controllers\BaseController;
 
-class Admin extends BaseController
+class Books extends BaseController
 {
     public function index()
     {
@@ -27,7 +27,7 @@ class Admin extends BaseController
         ]);
     }
 
-    public function book_add()
+    public function add()
     {
         $title       = $this->request->getPost('title');
         $category_id = $this->request->getPost('category_id');
@@ -36,7 +36,7 @@ class Admin extends BaseController
 
         $bookModel = new BookModel();
         $data      = [
-            'title'        => $title,
+            'title'       => $title,
             'category_id' => $category_id,
             'author'      => $author,
             'year'        => $year,
@@ -55,7 +55,7 @@ class Admin extends BaseController
         return redirect()->to('/admin');
     }
 
-    public function book_edit()
+    public function edit()
     {
         $id          = $this->request->getPost('book_id');
         $title       = $this->request->getPost('title');
@@ -84,12 +84,14 @@ class Admin extends BaseController
         return redirect()->to('/admin');
     }
 
-    public function book_delete()
+    public function delete()
     {
         $id = $this->request->getPost('book_id');
 
         $bookModel = new BookModel();
-        $book = $bookModel->find($id);
+        $book = $bookModel->withDeleted()->find($id);
+
+        $bookModel->delete($id);
 
         session()->setFlashdata('toast', [
             'title' => 'Buku',
@@ -98,7 +100,7 @@ class Admin extends BaseController
         return redirect()->to('/admin');
     }
 
-    public function get_book_data()
+    public function get_data()
     {
         if (!$this->request->isAJAX()) return;
 
