@@ -36,7 +36,7 @@
                     <h4>Buku yang sedang dipinjam</h4>
                 </div>
                 <div class="col text-end">
-                    <a href="<?= base_url('/visitor/return'); ?>" style="width: 150px;" class="btn btn-success">Kembalikan Buku</a>
+                    <a href="<?= base_url('/visitor/return'); ?>" style="width: 170px;" class="btn btn-success"><i class="bi bi-book-fill"></i> Kembalikan Buku</a>
                 </div>
             </div>
             <table class="table table-striped table-bordered">
@@ -80,7 +80,7 @@
                     <h4>Buku yang pernah dipinjam</h4>
                 </div>
                 <div class="col text-end">
-                    <a href="<?= base_url('/visitor/borrow'); ?>" style="width: 150px;" class="btn btn-primary">Pinjam Buku</a>
+                    <a href="<?= base_url('/visitor/borrow'); ?>" style="width: 170px;" class="btn btn-primary"><i class="bi bi-book"></i> Pinjam Buku</a>
                 </div>
             </div>
             <table class="table table-striped table-bordered">
